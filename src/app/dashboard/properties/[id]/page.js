@@ -8,6 +8,12 @@ import { supabase, checkConnection } from "@/lib/supabaseClient";
 import { formatPrice } from "@/lib/utils";
 import { BedDouble, Bath, Car, DoorOpen, Droplet, Flame, Sun, Lock, ChefHat } from "lucide-react";
 
+// Função para verificar se o Supabase está configurado
+const isSupabaseConfigured = () => {
+  return process.env.NEXT_PUBLIC_SUPABASE_URL && 
+         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+};
+
 // Mock data para propriedades individuais
 const mockPropertyData = {
   "1": {
@@ -82,83 +88,96 @@ export default function PropertyPage() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [useSupabase, setUseSupabase] = useState(true);
+  const [useSupabase, setUseSupabase] = useState(false);
   const sobreRef = useRef(null);
   const relatedRef = useRef(null);
 
-  useEffect(() => {
-    const fetchProperty = async () => {
-      try {
-        const isConnected = await checkConnection();
-        
-        if (isConnected) {
-          const { data, error } = await supabase
-            .from("properties")
-            .select("*")
-            .eq("property_id", id)
-            .single();
-            
-          if (error) throw error;
-          
-          if (data) {
-            setProperty(data);
-          } else {
-            // Usa mock data se não encontrar no Supabase
-            setProperty(mockPropertyData[id] || mockPropertyData["1"]);
-            setUseSupabase(false);
-          }
-        } else {
-          // Usa mock data se Supabase não está disponível
-          setProperty(mockPropertyData[id] || mockPropertyData["1"]);
-          setUseSupabase(false);
-        }
-      } catch (error) {
-        console.warn("Erro ao buscar imóvel, usando dados mock:", error);
-        setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+  const fetchProperty = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Verificar se o Supabase está configurado
+      if (!isSupabaseConfigured()) {
+        console.log("Supabase não configurado, usando dados mock");
         setUseSupabase(false);
-      } finally {
-        setLoading(false);
+        setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+        return;
       }
-    };
-    
-    fetchProperty();
+
+      // Tentar conectar ao Supabase
+      const isConnected = await checkConnection();
+      
+      if (isConnected) {
+        const { data, error } = await supabase
+          .from("properties")
+          .select("*")
+          .eq("property_id", id)
+          .single();
+          
+        if (error) {
+          if (error.code === 'PGRST116') {
+            // Nenhum registro encontrado
+            console.log(`Imóvel ${id} não encontrado no Supabase, usando mock`);
+            setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+            setUseSupabase(true);
+          } else {
+            throw error;
+          }
+        } else if (data) {
+          setProperty(data);
+          setUseSupabase(true);
+          console.log(`Imóvel ${id} carregado do Supabase`);
+        } else {
+          // Dados não encontrados
+          setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+          setUseSupabase(true);
+        }
+      } else {
+        throw new Error("Não foi possível conectar ao Supabase");
+      }
+    } catch (err) {
+      console.warn("Erro ao buscar imóvel:", err.message);
+      setError(err.message);
+      setUseSupabase(false);
+      setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchProperty();
+    }
   }, [id]);
 
-  // Adiciona aos recentemente vistos
+  // Adiciona aos recentemente vistos (sem usar localStorage em artifacts)
   useEffect(() => {
     if (property && typeof window !== "undefined") {
-      const stored = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
-      const filtered = stored.filter((item) => (item.property_id || item.id) !== property.property_id);
-      const updated = [
-        {
-          property_id: property.property_id,
-          title: property.title,
-          sale_price: property.sale_price,
-          location: property.location,
-          financing_compatible: property.financing_compatible,
-          timestamp: new Date().toISOString(),
-        },
-        ...filtered,
-      ].slice(0, 10);
-      localStorage.setItem("recentlyViewed", JSON.stringify(updated));
+      try {
+        const stored = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
+        const filtered = stored.filter((item) => (item.property_id || item.id) !== property.property_id);
+        const updated = [
+          {
+            property_id: property.property_id,
+            title: property.title,
+            sale_price: property.sale_price,
+            location: property.location,
+            financing_compatible: property.financing_compatible,
+            timestamp: new Date().toISOString(),
+          },
+          ...filtered,
+        ].slice(0, 10);
+        localStorage.setItem("recentlyViewed", JSON.stringify(updated));
+      } catch (err) {
+        console.warn("Erro ao salvar no localStorage:", err);
+      }
     }
   }, [property]);
-
-  if (loading)
-    return (
-      <div className="w-full h-[60vh] flex items-center justify-center">
-        <p className="text-muted-foreground">Carregando imóvel...</p>
-      </div>
-    );
-
-  if (!property)
-    return (
-      <div className="w-full h-[60vh] flex items-center justify-center">
-        <p className="text-muted-foreground">Imóvel não encontrado.</p>
-      </div>
-    );
 
   // Gera URLs de imagens baseadas no ID
   const getPhotosHighlight = () => {
@@ -170,7 +189,8 @@ export default function PropertyPage() {
       "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80"
     ];
     
-    const startIndex = parseInt(id) % fallbackImages.length;
+    const propertyId = id || "1";
+    const startIndex = parseInt(propertyId) % fallbackImages.length;
     return [
       fallbackImages[startIndex],
       fallbackImages[(startIndex + 1) % fallbackImages.length],
@@ -180,11 +200,47 @@ export default function PropertyPage() {
     ];
   };
 
+  if (loading) {
+    return (
+      <div className="w-full h-[60vh] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Carregando imóvel...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!property) {
+    return (
+      <div className="w-full h-[60vh] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-muted-foreground mb-4">Imóvel não encontrado.</p>
+          <button 
+            onClick={fetchProperty}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Tentar novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const photosHighlight = getPhotosHighlight();
   const mapAddress = property.full_address || property.location || "Fortaleza, CE";
 
   return (
     <div className="w-full bg-background text-foreground">
+      
+      {/* Status do sistema */}
+      {error && !useSupabase && (
+        <div className="bg-yellow-50 border border-yellow-200 p-3">
+          <p className="text-sm text-yellow-700">
+            <span className="font-medium">Aviso:</span> Usando dados de demonstração. {error}
+          </p>
+        </div>
+      )}
       
       <div className={`${showMap ? 'bg-[#f5f0e5]' : 'bg-secondary-greige'} flex flex-col lg:flex-row w-full`}>
         <div className="relative w-full lg:w-3/5 aspect-[3/2] lg:h-[80vh]">
@@ -193,6 +249,7 @@ export default function PropertyPage() {
               <div className="text-center">
                 <p className="text-gray-600 mb-2">Mapa não disponível</p>
                 <p className="text-sm text-gray-500">{mapAddress}</p>
+                <p className="text-xs text-gray-400 mt-2">Integração com mapas será adicionada em breve</p>
               </div>
               <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-[#f5f0e5] via-[#f5f0e5]/60 to-transparent pointer-events-none"></div>
             </div>
@@ -252,11 +309,9 @@ export default function PropertyPage() {
 
             <div className="flex flex-wrap gap-6 mt-4 text-sm text-gray-700">
               <span>🏠 {property.built_area_m2 || 0} m² construídos</span>
-              <span>🌳 {property.land_area_m2 || 0} m² terreno</span>
+              {property.land_area_m2 > 0 && <span>🌳 {property.land_area_m2} m² terreno</span>}
               {property.construction_year && <span>📅 Ano: {property.construction_year}</span>}
-              }
               {property.ready_to_live && <span>✅ Pronto para morar</span>}
-              }
             </div>
 
             <div className="flex flex-wrap gap-2 mt-4">
@@ -295,13 +350,13 @@ export default function PropertyPage() {
                 Descrição
               </button>
               <button
-                className="text-white bg-black px-4 py-2"
+                className="text-white bg-black px-4 py-2 hover:bg-gray-800 transition-colors"
                 onClick={() => setShowMap(!showMap)}
               >
                 {showMap ? "Foto" : "Mapa"}
               </button>
               <button
-                className="text-white bg-black px-4 py-2"
+                className="text-white bg-black px-4 py-2 hover:bg-gray-800 transition-colors"
                 onClick={() => relatedRef.current?.scrollIntoView({ behavior: "smooth" })}
               >
                 Relacionados
@@ -314,22 +369,23 @@ export default function PropertyPage() {
                   `Olá! Gostaria de agendar uma visita para este imóvel (ref: ${property?.property_id}).`
                 )}`}
                 target="_blank"
-                className="bg-black text-white px-6 py-3 uppercase text-xs tracking-widest flex justify-center items-center"
+                rel="noopener noreferrer"
+                className="bg-black text-white px-6 py-3 uppercase text-xs tracking-widest flex justify-center items-center hover:bg-gray-800 transition-colors"
               >
                 Solicitar visita
               </a>
 
               <p className="text-sm font-serif text-foreground">{property.full_address || property.location}</p>
 
-              <a href="tel:+55 85 8602-0514" className="font-medium cursor-pointer text-black underline">
+              <a href="tel:+5585860205014" className="font-medium cursor-pointer text-black underline hover:no-underline">
                 ou ligue para +55 (85) 8602-0514
               </a>
             </div>
 
             {!useSupabase && (
-              <div className="mt-4">
-                <p className="text-xs text-muted-foreground">
-                  Dados de demonstração - Configure Supabase para dados reais
+              <div className="mt-4 p-2 bg-blue-50 rounded">
+                <p className="text-xs text-blue-600">
+                  📝 Dados de demonstração - Configure Supabase para dados reais
                 </p>
               </div>
             )}
@@ -342,13 +398,15 @@ export default function PropertyPage() {
         <p className="text-lg md:text-xl font-light text-foreground leading-relaxed mb-4">
           {property.title || "Imóvel de alto padrão com excelente localização"}
         </p>
-        <p
+        <div
           className={`text-base md:text-lg text-muted-foreground mt-4 leading-relaxed transition-all duration-300 ${
             expanded ? "max-h-full" : "max-h-24 overflow-hidden"
           }`}
         >
-          {property.description || "Este belo imóvel oferece conforto e elegância em uma localização privilegiada. Com acabamentos de primeira qualidade e uma arquitetura moderna, é perfeito para quem busca qualidade de vida e sofisticação."}
-        </p>
+          <p>
+            {property.description || "Este belo imóvel oferece conforto e elegância em uma localização privilegiada. Com acabamentos de primeira qualidade e uma arquitetura moderna, é perfeito para quem busca qualidade de vida e sofisticação."}
+          </p>
+        </div>
         <button
           onClick={() => setExpanded(!expanded)}
           className="mt-6 px-6 py-3 border border-primary text-primary uppercase tracking-widest text-sm hover:bg-primary hover:text-white transition"
@@ -362,7 +420,7 @@ export default function PropertyPage() {
           <div key={idx} className="relative aspect-[4/3] w-full rounded-sm overflow-hidden">
             <Image 
               src={photo} 
-              alt={`Foto do cômodo ${idx + 1}`} 
+              alt={`Foto do cômodo ${idx + 2}`} 
               fill 
               className="object-cover" 
               sizes="(max-width: 768px) 50vw, 25vw"
@@ -381,12 +439,13 @@ export default function PropertyPage() {
             `Olá! Gostaria de mais informações sobre este imóvel (ref: ${property?.property_id}).`
           )}`}
           target="_blank"
-          className="bg-green-500 text-white px-4 py-2 rounded text-xs flex items-center gap-2"
+          rel="noopener noreferrer"
+          className="bg-green-500 text-white px-4 py-2 rounded text-xs flex items-center gap-2 hover:bg-green-600 transition-colors"
         >
           Converse sobre este imóvel
         </a>
-        <input type="email" placeholder="ex: joana@exemplo.com" className="p-2 pl-4 w-full lg:w-64 text-sm text-black" />
-        <button className="bg-black text-white px-4 py-2 text-xs uppercase tracking-widest">
+        <input type="email" placeholder="ex: joana@exemplo.com" className="p-2 pl-4 w-full lg:w-64 text-sm text-black rounded" />
+        <button className="bg-black text-white px-4 py-2 text-xs uppercase tracking-widest hover:bg-gray-800 transition-colors">
           Inscrever-se
         </button>
         <label className="text-xs flex items-center gap-2 opacity-70">
