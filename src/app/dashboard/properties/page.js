@@ -280,84 +280,112 @@ export default function Properties() {
   }
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen bg-luxury-cream">
       <PropertyFilter 
         onFilterChange={handleFilterChange} 
         totalProperties={filteredProperties.length} 
       />
       
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* Seção principal com background elegante */}
+      <section className="relative">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1920&q=80')`,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-luxury-cream/95 via-luxury-cream/90 to-luxury-cream/95" />
         
-        <div className="py-12 mb-16">
-          <p className="label-luxury text-muted-foreground/80 mb-4">
-            Nosso Portfólio
-          </p>
-          <h1 className="text-3xl lg:text-4xl title-luxury text-contrast-high">
-            Todos os Imóveis
-          </h1>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           
-          {/* Status do sistema */}
-          {error && !useSupabase && (
-            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-sm text-yellow-700">
-                <span className="font-medium">Aviso:</span> Usando dados de demonstração. 
-                {error && ` (${error})`}
-              </p>
-            </div>
-          )}
-          
-          {!useSupabase && !error && (
-            <p className="text-sm text-muted-foreground mt-2">
-              Dados de demonstração - Configure Supabase para dados reais
+          {/* Header elegante */}
+          <div className="pt-20 pb-16 text-center">
+            <div className="w-px h-16 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+            <p className="label-luxury text-luxury-gray mb-4 tracking-widest">
+              NOSSO PORTFÓLIO
             </p>
-          )}
-          
-          {useSupabase && (
-            <p className="text-sm text-green-600 mt-2">
-              ✓ Conectado ao banco de dados
-            </p>
-          )}
-        </div>
-
-        {/* Lista de propriedades */}
-        {filteredProperties.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground font-light text-lg">
-              {properties.length === 0 ? "Nenhum imóvel encontrado." : "Nenhum imóvel corresponde aos filtros selecionados."}
-            </p>
-            <button 
-              onClick={fetchProperties}
-              className="mt-4 px-6 py-3 btn-luxury btn-text-luxury transition-colors"
-            >
-              Tentar novamente
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-              {filteredProperties.map((property) => (
-                <PropertyCard 
-                  key={property.property_id || property.id} 
-                  property={property} 
-                />
-              ))}
-            </div>
+            <h1 className="text-4xl lg:text-5xl title-display text-luxury-charcoal mb-6 font-light">
+              Todos os Imóveis
+            </h1>
             
-            {/* Footer com informações */}
-            <div className="mt-16 pt-8 border-t border-border">
-              <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-                <p>
-                  <span className="text-luxury">Exibindo {filteredProperties.length} de {properties.length} {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}</span>
-                </p>
-                <p>
-                  <span className="text-luxury-light">{useSupabase ? 'Dados em tempo real' : 'Dados de demonstração'}</span>
+            {/* Status do sistema com design elegante */}
+            {error && !useSupabase && (
+              <div className="max-w-md mx-auto mt-6 p-4 bg-white/90 backdrop-blur-sm border border-warm-lamp/30 rounded-sm shadow-lg">
+                <p className="text-sm text-luxury-gray text-luxury">
+                  <span className="font-medium text-warm-lamp">Aviso:</span> Usando dados de demonstração. 
+                  {error && ` (${error})`}
                 </p>
               </div>
-            </div>
-          </>
-        )}
+            )}
+            
+            {!useSupabase && !error && (
+              <p className="text-sm text-luxury-gray/80 mt-4 text-luxury-light">
+                Dados de demonstração - Configure Supabase para dados reais
+              </p>
+            )}
+            
+            {useSupabase && (
+              <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-sm shadow-sm">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <p className="text-sm text-luxury-gray text-luxury">
+                  Conectado ao banco de dados
+                </p>
+              </div>
+            )}
+          </div>
 
-      </div>
+          {/* Lista de propriedades */}
+          {filteredProperties.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="w-px h-12 bg-luxury-gray mx-auto mb-6 opacity-50"></div>
+              <p className="text-luxury-gray font-light text-lg text-luxury-light mb-6">
+                {properties.length === 0 ? "Nenhum imóvel encontrado." : "Nenhum imóvel corresponde aos filtros selecionados."}
+              </p>
+              <button 
+                onClick={fetchProperties}
+                className="btn-luxury px-8 py-3 btn-text-luxury"
+              >
+                Tentar novamente
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 pb-20">
+                {filteredProperties.map((property) => (
+                  <PropertyCard 
+                    key={property.property_id || property.id} 
+                    property={property} 
+                  />
+                ))}
+              </div>
+              
+              {/* Footer com informações elegante */}
+              <div className="pb-20 pt-8">
+                <div className="w-24 h-px bg-gradient-to-r from-transparent via-luxury-gray to-transparent mx-auto mb-8"></div>
+                <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-luxury-gray">
+                  <p className="text-luxury-light mb-2 sm:mb-0">
+                    Exibindo <span className="font-medium text-luxury-charcoal">{filteredProperties.length}</span> de <span className="font-medium text-luxury-charcoal">{properties.length}</span> {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}
+                  </p>
+                  <p className="text-luxury-light">
+                    {useSupabase ? (
+                      <span className="inline-flex items-center gap-1">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        Dados em tempo real
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1">
+                        <div className="w-1.5 h-1.5 bg-warm-lamp rounded-full"></div>
+                        Dados de demonstração
+                      </span>
+                    )}
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+
+        </div>
+      </section>
     </div>
   );
 }
