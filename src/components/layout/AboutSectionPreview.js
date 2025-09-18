@@ -19,10 +19,10 @@ export default function AboutSectionPreview() {
         <div>
           <div className="w-px h-12 bg-warm-lamp mb-6 lamp-glow"></div>
           <p className="text-lg md:text-xl font-light text-luxury-charcoal leading-relaxed text-luxury-light">
-            “A Alpha Conceito nasceu em 2014 com o compromisso de oferecer um
+            "A Alpha Conceito nasceu em 2014 com o compromisso de oferecer um
             atendimento transparente, ético e personalizado no mercado
             imobiliário de Fortaleza. Nosso foco é garantir negociações seguras
-            e sólidas, sempre com profissionalismo e dedicação aos clientes.”
+            e sólidas, sempre com profissionalismo e dedicação aos clientes."
           </p>
           <p className="mt-6 font-semibold text-sm uppercase tracking-widest text-luxury-gray label-luxury">
             — Alpha Conceito Imobiliária
@@ -57,21 +57,6 @@ export default function AboutSectionPreview() {
           <Link
             href="/dashboard/about"
             className="btn-luxury px-6 py-3 btn-text-luxury mt-8 inline-block"
-          >
-            Sobre nós
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-          “Alpha Conceito: confiança, transparência e excelência no mercado
-          imobiliário desde 2014.”
-        </p>
-        <div className="absolute bottom-8 z-10">
-          <Link
-            href="/dashboard/about"
-            className="px-6 py-3 border border-white text-white uppercase tracking-widest text-sm hover:bg-white hover:text-black transition"
           >
             Sobre nós
           </Link>
