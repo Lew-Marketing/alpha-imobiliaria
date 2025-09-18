@@ -113,11 +113,11 @@ export default function Sobre() {
             backgroundImage: `url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-luxury-charcoal/85 via-luxury-gray/75 to-luxury-charcoal/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85" />
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
-          <h2 className="text-4xl title-luxury text-contrast-light mb-12">
+          <h2 className="text-4xl title-luxury text-white mb-12 drop-shadow-lg">
             Nossos Valores
           </h2>
 
@@ -128,12 +128,12 @@ export default function Sobre() {
               { title: "Confiança", desc: "Relacionamentos duradouros" },
               { title: "Inovação", desc: "Tecnologia a seu favor" }
             ].map((value, index) => (
-              <div key={index} className="card-luxury rounded-lg p-6 text-center">
+              <div key={index} className="bg-white/95 backdrop-blur-sm rounded-lg p-6 text-center shadow-xl">
                 <div className="w-px h-6 bg-accent mx-auto mb-4 lamp-glow"></div>
-                <h3 className="text-lg title-luxury text-contrast-high mb-3">
+                <h3 className="text-lg title-luxury text-gray-900 mb-3 font-semibold">
                   {value.title}
                 </h3>
-                <p className="text-luxury-gray text-luxury-light leading-relaxed text-sm">
+                <p className="text-gray-700 text-luxury-light leading-relaxed text-sm">
                   {value.desc}
                 </p>
               </div>
@@ -150,21 +150,21 @@ export default function Sobre() {
             backgroundImage: `url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-luxury-charcoal/90 to-luxury-gray/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 to-black/75" />
         
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-pearl-white">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          <h2 className="text-4xl title-luxury text-contrast-light mb-6">
+          <h2 className="text-4xl title-luxury text-white mb-6 drop-shadow-lg font-semibold">
             Vamos Conversar
           </h2>
-          <p className="text-lg text-luxury-light mb-10 opacity-90 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
             Entre em contato e descubra como podemos ajudar você
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/dashboard/contact"
-              className="btn-luxury px-8 py-3 btn-text-luxury"
+              className="bg-white text-gray-900 px-8 py-3 btn-text-luxury hover:bg-gray-100 transition-all duration-300 shadow-lg font-medium"
             >
               Contato
             </a>
@@ -172,7 +172,7 @@ export default function Sobre() {
               href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-pearl-white/30 text-pearl-white px-8 py-3 btn-text-luxury hover:bg-pearl-white/10 transition-colors"
+              className="border-2 border-white/80 text-white px-8 py-3 btn-text-luxury hover:bg-white/20 transition-all duration-300 backdrop-blur-sm font-medium"
             >
               WhatsApp
             </a>
