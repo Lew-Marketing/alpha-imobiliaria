@@ -41,3 +41,4 @@ export const checkConnection = async () => {
     console.warn('Supabase connection failed:', error.message);
     return false;
   }
+}
