@@ -4,9 +4,79 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase, checkConnection } from "@/lib/supabaseClient";
 import { formatPrice } from "@/lib/utils";
 import { BedDouble, Bath, Car, DoorOpen, Droplet, Flame, Sun, Lock, ChefHat } from "lucide-react";
+
+// Mock data para propriedades individuais
+const mockPropertyData = {
+  "1": {
+    property_id: "1",
+    title: "Casa Moderna em Condomínio",
+    location: "Eusébio, CE",
+    full_address: "Rua das Flores, 123 - Eusébio, CE",
+    sale_price: 850000,
+    financing_compatible: true,
+    bedrooms: 4,
+    suites: 2,
+    bathrooms: 3,
+    parking_spaces: 2,
+    built_area_m2: 180,
+    land_area_m2: 300,
+    construction_year: 2020,
+    ready_to_live: true,
+    has_pool: true,
+    has_gourmet_area: true,
+    has_barbecue: true,
+    has_solar_energy: false,
+    closed_gate: true,
+    description: "Linda casa moderna em condomínio fechado, com acabamentos de primeira qualidade. Possui 4 quartos sendo 2 suítes, sala ampla, cozinha planejada, área gourmet com churrasqueira e piscina. Localizada em uma das melhores regiões do Eusébio."
+  },
+  "2": {
+    property_id: "2",
+    title: "Apartamento Luxuoso",
+    location: "Meireles, Fortaleza",
+    full_address: "Av. Beira Mar, 456 - Meireles, Fortaleza, CE",
+    sale_price: 650000,
+    financing_compatible: true,
+    bedrooms: 3,
+    suites: 1,
+    bathrooms: 2,
+    parking_spaces: 2,
+    built_area_m2: 120,
+    land_area_m2: 0,
+    construction_year: 2018,
+    ready_to_live: true,
+    has_pool: false,
+    has_gourmet_area: false,
+    has_barbecue: false,
+    has_solar_energy: true,
+    closed_gate: false,
+    description: "Apartamento luxuoso com vista para o mar, localizado na melhor região de Fortaleza. Possui 3 quartos sendo 1 suíte, sala ampla com varanda, cozinha americana e 2 vagas de garagem."
+  },
+  "3": {
+    property_id: "3",
+    title: "Casa com Piscina",
+    location: "Aldeota, Fortaleza",
+    full_address: "Rua Santos Dumont, 789 - Aldeota, Fortaleza, CE",
+    sale_price: 1200000,
+    financing_compatible: false,
+    bedrooms: 5,
+    suites: 3,
+    bathrooms: 4,
+    parking_spaces: 3,
+    built_area_m2: 250,
+    land_area_m2: 400,
+    construction_year: 2019,
+    ready_to_live: true,
+    has_pool: true,
+    has_gourmet_area: true,
+    has_barbecue: true,
+    has_solar_energy: true,
+    closed_gate: true,
+    description: "Magnífica casa de alto padrão com piscina e área gourmet completa. Possui 5 quartos sendo 3 suítes, sala de estar e jantar, escritório, cozinha gourmet e amplo quintal com piscina."
+  }
+};
 
 export default function PropertyPage() {
   const { id } = useParams();
@@ -14,24 +84,49 @@ export default function PropertyPage() {
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [useSupabase, setUseSupabase] = useState(true);
   const sobreRef = useRef(null);
   const relatedRef = useRef(null);
 
   useEffect(() => {
     const fetchProperty = async () => {
-      const { data, error } = await supabase
-        .from("properties")
-        .select("*")
-        .eq("property_id", id)
-        .single();
-      if (error) console.error("Erro ao buscar imóvel:", error);
-      setProperty(data);
-      setLoading(false);
+      try {
+        const isConnected = await checkConnection();
+        
+        if (isConnected) {
+          const { data, error } = await supabase
+            .from("properties")
+            .select("*")
+            .eq("property_id", id)
+            .single();
+            
+          if (error) throw error;
+          
+          if (data) {
+            setProperty(data);
+          } else {
+            // Usa mock data se não encontrar no Supabase
+            setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+            setUseSupabase(false);
+          }
+        } else {
+          // Usa mock data se Supabase não está disponível
+          setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+          setUseSupabase(false);
+        }
+      } catch (error) {
+        console.warn("Erro ao buscar imóvel, usando dados mock:", error);
+        setProperty(mockPropertyData[id] || mockPropertyData["1"]);
+        setUseSupabase(false);
+      } finally {
+        setLoading(false);
+      }
     };
+    
     fetchProperty();
   }, [id]);
 
-  
+  // Adiciona aos recentemente vistos
   useEffect(() => {
     if (property && typeof window !== "undefined") {
       const stored = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
@@ -65,15 +160,27 @@ export default function PropertyPage() {
       </div>
     );
 
-  const baseUrl = `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${id}`;
-  const photosHighlight = [
-    `${baseUrl}/fachada.jpg`,
-    `${baseUrl}/sala.jpg`,
-    `${baseUrl}/jardin.jpg`,
-    `${baseUrl}/banheiro.jpg`,
-    `${baseUrl}/cozinha.jpg`,
-  ];
+  // Gera URLs de imagens baseadas no ID
+  const getPhotosHighlight = () => {
+    const fallbackImages = [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80"
+    ];
+    
+    const startIndex = parseInt(id) % fallbackImages.length;
+    return [
+      fallbackImages[startIndex],
+      fallbackImages[(startIndex + 1) % fallbackImages.length],
+      fallbackImages[(startIndex + 2) % fallbackImages.length],
+      fallbackImages[(startIndex + 3) % fallbackImages.length],
+      fallbackImages[(startIndex + 4) % fallbackImages.length]
+    ];
+  };
 
+  const photosHighlight = getPhotosHighlight();
   const mapAddress = property.full_address || property.location || "Fortaleza, CE";
 
   return (
@@ -82,21 +189,22 @@ export default function PropertyPage() {
       <div className={`${showMap ? 'bg-[#f5f0e5]' : 'bg-secondary-greige'} flex flex-col lg:flex-row w-full`}>
         <div className="relative w-full lg:w-3/5 aspect-[3/2] lg:h-[80vh]">
           {showMap ? (
-            <div className="relative w-full h-full">
-              <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${encodeURIComponent(mapAddress)}`}
-                width="100%"
-                height="100%"
-                className="border-0 w-full h-full"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-
+            <div className="relative w-full h-full bg-gray-200 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-gray-600 mb-2">Mapa não disponível</p>
+                <p className="text-sm text-gray-500">{mapAddress}</p>
+              </div>
               <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-[#f5f0e5] via-[#f5f0e5]/60 to-transparent pointer-events-none"></div>
             </div>
           ) : (
-            <Image src={photosHighlight[0]} alt={property.title || "Imóvel"} fill className="object-cover" priority />
+            <Image 
+              src={photosHighlight[0]} 
+              alt={property.title || "Imóvel"} 
+              fill 
+              className="object-cover" 
+              priority 
+              sizes="(max-width: 1024px) 100vw, 60vw"
+            />
           )}
 
           <Link
@@ -107,7 +215,6 @@ export default function PropertyPage() {
           </Link>
         </div>
 
-       
         <div className={`${showMap ? 'bg-[#f5f0e5]' : 'bg-secondary-greige'} flex justify-start items-start lg:items-center w-full lg:w-2/5 lg:sticky top-32`}>
           <div className="relative mx-6 lg:mx-20 py-10 lg:py-0 w-full">
             <p className="text-lg lg:text-xl font-serif leading-8 font-light text-foreground">
@@ -150,7 +257,6 @@ export default function PropertyPage() {
               {property.ready_to_live && <span>✅ Pronto para morar</span>}
             </div>
 
-        
             <div className="flex flex-wrap gap-2 mt-4">
               {property.has_pool && (
                 <span className="flex items-center gap-1 bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">
@@ -217,21 +323,29 @@ export default function PropertyPage() {
                 ou ligue para +55 (85) 8602-0514
               </a>
             </div>
+
+            {!useSupabase && (
+              <div className="mt-4">
+                <p className="text-xs text-muted-foreground">
+                  Dados de demonstração - Configure Supabase para dados reais
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       <div ref={sobreRef} className="bg-background px-6 md:px-[12vw] py-12 w-full">
-        <h2 className="text-2xl font-bold mb-4">Luxuosa Casa de Alto Padrão</h2>
+        <h2 className="text-2xl font-bold mb-4">{property.title}</h2>
         <p className="text-lg md:text-xl font-light text-foreground leading-relaxed mb-4">
-          {property.title || "Armazenamento planejado de forma elegante..."}
+          {property.title || "Imóvel de alto padrão com excelente localização"}
         </p>
         <p
           className={`text-base md:text-lg text-muted-foreground mt-4 leading-relaxed transition-all duration-300 ${
             expanded ? "max-h-full" : "max-h-24 overflow-hidden"
           }`}
         >
-          {property.description || "Esta bela casa de três quartos..."}
+          {property.description || "Este belo imóvel oferece conforto e elegância em uma localização privilegiada. Com acabamentos de primeira qualidade e uma arquitetura moderna, é perfeito para quem busca qualidade de vida e sofisticação."}
         </p>
         <button
           onClick={() => setExpanded(!expanded)}
@@ -244,7 +358,13 @@ export default function PropertyPage() {
       <div className="max-w-screen-2xl mx-auto px-5 md:px-10 py-12 grid grid-cols-2 gap-6">
         {photosHighlight.slice(1, 5).map((photo, idx) => (
           <div key={idx} className="relative aspect-[4/3] w-full rounded-sm overflow-hidden">
-            <Image src={photo} alt={`Foto do cômodo ${idx + 1}`} fill className="object-cover" />
+            <Image 
+              src={photo} 
+              alt={`Foto do cômodo ${idx + 1}`} 
+              fill 
+              className="object-cover" 
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
           </div>
         ))}
       </div>
@@ -263,7 +383,7 @@ export default function PropertyPage() {
         >
           Converse sobre este imóvel
         </a>
-        <input type="email" placeholder="ex: joana@exemplo.com" className="p-2 pl-4 w-full lg:w-64 text-sm" />
+        <input type="email" placeholder="ex: joana@exemplo.com" className="p-2 pl-4 w-full lg:w-64 text-sm text-black" />
         <button className="bg-black text-white px-4 py-2 text-xs uppercase tracking-widest">
           Inscrever-se
         </button>

@@ -2,7 +2,44 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase, checkConnection } from "@/lib/supabaseClient";
+
+// Mock data para relacionados
+const mockRelatedProperties = [
+  {
+    property_id: "4",
+    title: "Cobertura Duplex",
+    location: "Cocó, Fortaleza",
+    sale_price: 980000,
+    financing_compatible: true,
+    photos_highlight: [
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800",
+      "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=800"
+    ]
+  },
+  {
+    property_id: "5",
+    title: "Casa de Praia",
+    location: "Porto das Dunas, Aquiraz",
+    sale_price: 750000,
+    financing_compatible: true,
+    photos_highlight: [
+      "https://images.unsplash.com/photo-1600566753229-f8d4c57c7b8b?w=800",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"
+    ]
+  },
+  {
+    property_id: "6",
+    title: "Loft Moderno",
+    location: "Centro, Fortaleza",
+    sale_price: 450000,
+    financing_compatible: true,
+    photos_highlight: [
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800"
+    ]
+  }
+];
 
 export default function RelatedSales() {
   const [properties, setProperties] = useState([]);
@@ -10,32 +47,43 @@ export default function RelatedSales() {
   const [loading, setLoading] = useState(true);
   const [recentlyViewedLoading, setRecentlyViewedLoading] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
+  const [useSupabase, setUseSupabase] = useState(true);
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const { data, error } = await supabase
-          .from("properties")
-          .select("*")
-          .eq("has_photos", true)
-          .order("created_at", { ascending: false })
-          .limit(3);
+        const isConnected = await checkConnection();
+        
+        if (isConnected) {
+          const { data, error } = await supabase
+            .from("properties")
+            .select("*")
+            .eq("has_photos", true)
+            .order("created_at", { ascending: false })
+            .limit(3);
 
-        if (error) throw error;
+          if (error) throw error;
 
-        const processed = data.map((p) => {
-          const baseUrl = `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}`;
-          return {
-            ...p,
-            mainImage: `${baseUrl}/fachada.jpg`,
-            hoverImage: `${baseUrl}/sala.jpg`,
-          };
-        });
-
-        setProperties(processed);
+          if (data && data.length > 0) {
+            const processed = data.map((p) => ({
+              ...p,
+              photos_highlight: p.photos_highlight || [
+                `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/fachada.jpg`,
+                `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/sala.jpg`
+              ]
+            }));
+            setProperties(processed);
+          } else {
+            setProperties(mockRelatedProperties);
+          }
+        } else {
+          setUseSupabase(false);
+          setProperties(mockRelatedProperties);
+        }
       } catch (err) {
-        console.error("Erro ao buscar imóveis:", err);
-        setProperties([]);
+        console.warn("Erro ao buscar imóveis relacionados, usando dados mock:", err);
+        setUseSupabase(false);
+        setProperties(mockRelatedProperties);
       } finally {
         setLoading(false);
       }
@@ -43,7 +91,6 @@ export default function RelatedSales() {
 
     const fetchRecentlyViewed = async () => {
       try {
-        // Verifica se localStorage está disponível (lado cliente)
         if (typeof window === 'undefined') {
           setRecentlyViewedLoading(false);
           return;
@@ -57,7 +104,25 @@ export default function RelatedSales() {
           return;
         }
 
-        // Busca os detalhes dos imóveis recentemente vistos
+        // Para mock data, usa os dados armazenados diretamente
+        if (!useSupabase) {
+          const mockRecentlyViewed = stored.slice(0, 3).map((item, index) => ({
+            property_id: item.property_id,
+            title: item.title || `Imóvel ${item.property_id}`,
+            location: item.location || "Fortaleza, CE",
+            sale_price: item.sale_price || 500000,
+            financing_compatible: item.financing_compatible !== false,
+            photos_highlight: [
+              `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&sig=${index}`,
+              `https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&sig=${index}`
+            ]
+          }));
+          setRecentlyViewed(mockRecentlyViewed);
+          setRecentlyViewedLoading(false);
+          return;
+        }
+
+        // Busca os detalhes dos imóveis recentemente vistos no Supabase
         const propertyIds = stored.map(item => item.property_id || item.id);
         
         if (propertyIds.length === 0) {
@@ -66,34 +131,35 @@ export default function RelatedSales() {
           return;
         }
 
-        const { data, error } = await supabase
-          .from("properties")
-          .select("*")
-          .in("property_id", propertyIds)
-          .eq("has_photos", true);
+        const isConnected = await checkConnection();
+        
+        if (isConnected) {
+          const { data, error } = await supabase
+            .from("properties")
+            .select("*")
+            .in("property_id", propertyIds)
+            .eq("has_photos", true);
 
-        if (error) throw error;
+          if (error) throw error;
 
-        // Processa os dados e mantém a ordem do localStorage
-        const processed = data?.map((p) => {
-          const baseUrl = `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}`;
-          return {
+          const processed = data?.map((p) => ({
             ...p,
-            mainImage: `${baseUrl}/fachada.jpg`,
-            hoverImage: `${baseUrl}/sala.jpg`,
-          };
-        }) || [];
+            photos_highlight: p.photos_highlight || [
+              `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/fachada.jpg`,
+              `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/sala.jpg`
+            ]
+          })) || [];
 
-        // Ordena conforme a ordem do localStorage (mais recente primeiro)
-        const orderedRecent = [];
-        stored.forEach(storedItem => {
-          const found = processed.find(p => p.property_id === (storedItem.property_id || storedItem.id));
-          if (found) orderedRecent.push(found);
-        });
+          const orderedRecent = [];
+          stored.forEach(storedItem => {
+            const found = processed.find(p => p.property_id === (storedItem.property_id || storedItem.id));
+            if (found) orderedRecent.push(found);
+          });
 
-        setRecentlyViewed(orderedRecent.slice(0, 3)); // Limita a 3 itens
+          setRecentlyViewed(orderedRecent.slice(0, 3));
+        }
       } catch (err) {
-        console.error("Erro ao buscar imóveis recentemente vistos:", err);
+        console.warn("Erro ao buscar imóveis recentemente vistos:", err);
         setRecentlyViewed([]);
       } finally {
         setRecentlyViewedLoading(false);
@@ -102,32 +168,7 @@ export default function RelatedSales() {
 
     fetchProperties();
     fetchRecentlyViewed();
-  }, []);
-
-  // Função para adicionar aos recentemente vistos (para usar em outras páginas)
-  const addToRecentlyViewed = (property) => {
-    if (typeof window === 'undefined') return;
-
-    const stored = JSON.parse(localStorage.getItem("recentlyViewed") || "[]");
-    
-    // Remove duplicatas
-    const filtered = stored.filter(item => 
-      (item.property_id || item.id) !== property.property_id
-    );
-    
-    // Adiciona no início
-    const updated = [
-      { 
-        property_id: property.property_id,
-        title: property.title,
-        sale_price: property.sale_price,
-        timestamp: new Date().toISOString()
-      },
-      ...filtered
-    ].slice(0, 10); // Mantém apenas os 10 mais recentes
-
-    localStorage.setItem("recentlyViewed", JSON.stringify(updated));
-  };
+  }, [useSupabase]);
 
   if (loading)
     return (
@@ -156,11 +197,14 @@ export default function RelatedSales() {
               <div className="relative aspect-[3/2] w-full rounded overflow-hidden">
                 <Image
                   src={
-                    hoverIndex === index ? property.hoverImage : property.mainImage
+                    hoverIndex === index && property.photos_highlight?.[1] 
+                      ? property.photos_highlight[1] 
+                      : property.photos_highlight?.[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"
                   }
                   alt={property.title || "Imóvel"}
                   fill
                   className="object-cover transition-opacity duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
@@ -214,10 +258,11 @@ export default function RelatedSales() {
               >
                 <div className="relative aspect-[3/2] w-full rounded overflow-hidden">
                   <Image
-                    src={property.mainImage}
+                    src={property.photos_highlight?.[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"}
                     alt={property.title || "Imóvel"}
                     fill
                     className="object-cover transition-opacity duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 <div className="mt-6">
@@ -247,6 +292,14 @@ export default function RelatedSales() {
           </p>
         )}
       </div>
+
+      {!useSupabase && (
+        <div className="mt-8 text-center">
+          <p className="text-xs text-muted-foreground">
+            Dados de demonstração - Configure Supabase para dados reais
+          </p>
+        </div>
+      )}
     </div>
   );
 }
