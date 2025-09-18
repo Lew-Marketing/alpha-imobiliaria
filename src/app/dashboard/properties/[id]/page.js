@@ -254,7 +254,9 @@ export default function PropertyPage() {
               <span>🏠 {property.built_area_m2 || 0} m² construídos</span>
               <span>🌳 {property.land_area_m2 || 0} m² terreno</span>
               {property.construction_year && <span>📅 Ano: {property.construction_year}</span>}
+              }
               {property.ready_to_live && <span>✅ Pronto para morar</span>}
+              }
             </div>
 
             <div className="flex flex-wrap gap-2 mt-4">
