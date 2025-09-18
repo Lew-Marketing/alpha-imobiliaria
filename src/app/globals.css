@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Importar fontes premium */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+
 /* Performance optimizations */
 * {
   -webkit-font-smoothing: antialiased;
@@ -85,7 +88,9 @@ body {
   --color-warm-white: var(--warm-white);
   --color-soft-beige: var(--soft-beige);
   
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -113,6 +118,101 @@ body {
   backface-visibility: hidden;
   line-height: 1.6;
 
+}
+
+/* Tipografia Premium */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Classe especial para Alpha */
+.alpha-brand {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.alpha-a {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--color-warm-lamp);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.alpha-a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-warm-lamp), transparent);
+  opacity: 0.6;
+}
+
+/* Títulos impactantes */
+.title-luxury {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.title-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* Texto corpo elegante */
+.text-luxury {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+.text-luxury-light {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+}
+
+/* Botões premium */
+.btn-text-luxury {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+/* Labels e pequenos textos */
+.label-luxury {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Melhor contraste para legibilidade */
+.text-contrast-high {
+  color: var(--color-luxury-charcoal);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.1);
+}
+
+.text-contrast-light {
+  color: var(--color-pearl-white);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Smooth transitions for all interactive elements */

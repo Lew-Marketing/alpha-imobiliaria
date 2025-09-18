@@ -54,10 +54,10 @@ export default function Contato() {
         
         <div className="relative z-10 text-center text-pearl-white max-w-3xl mx-auto px-6">
           <div className="w-px h-16 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          <h1 className="text-5xl font-light mb-6 tracking-wide">
+          <h1 className="text-5xl title-display text-contrast-light mb-6">
             Contato
           </h1>
-          <p className="text-lg font-light opacity-90 leading-relaxed">
+          <p className="text-lg text-luxury-light opacity-90 leading-relaxed">
             Vamos conversar sobre seu próximo lar
           </p>
         </div>
@@ -74,31 +74,31 @@ export default function Contato() {
               {/* Card principal */}
               <div className="card-luxury rounded-lg p-10">
                 <div className="w-px h-12 bg-accent mb-6 lamp-glow"></div>
-                <h2 className="text-2xl font-light text-luxury-charcoal mb-8 tracking-wide alpha-brand">
+                <h2 className="text-2xl title-luxury text-contrast-high mb-8 alpha-brand">
                   <span className="alpha-a">A</span>lpha Conceito
                 </h2>
                 
-                <div className="space-y-6 text-luxury-gray font-light">
+                <div className="space-y-6 text-luxury-gray text-luxury">
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-luxury-light-gray mb-2 font-medium">Endereço</p>
-                    <p className="leading-relaxed">Av. Pacífico, 731, Sala 305<br />Cidade Alpha, Eusébio, CE</p>
+                    <p className="label-luxury text-luxury-light-gray mb-2">Endereço</p>
+                    <p className="text-luxury-light leading-relaxed">Av. Pacífico, 731, Sala 305<br />Cidade Alpha, Eusébio, CE</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-luxury-light-gray mb-2 font-medium">Telefones</p>
-                    <a href="tel:+558541413632" className="block hover:text-accent transition-colors">
+                    <p className="label-luxury text-luxury-light-gray mb-2">Telefones</p>
+                    <a href="tel:+558541413632" className="block text-luxury hover:text-accent transition-colors">
                       (85) 4141-3632
                     </a>
-                    <a href="tel:+5585996353513" className="block hover:text-accent transition-colors">
+                    <a href="tel:+5585996353513" className="block text-luxury hover:text-accent transition-colors">
                       (85) 99635-3513
                     </a>
                   </div>
                   
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-luxury-light-gray mb-2 font-medium">Email</p>
+                    <p className="label-luxury text-luxury-light-gray mb-2">Email</p>
                     <a 
                       href="mailto:comercialalphaconceito@gmail.com" 
-                      className="hover:text-accent transition-colors"
+                      className="text-luxury hover:text-accent transition-colors"
                     >
                       comercialalphaconceito@gmail.com
                     </a>
@@ -118,13 +118,13 @@ export default function Contato() {
                 
                 <div className="relative z-10 p-10 text-pearl-white">
                   <div className="w-px h-8 bg-warm-lamp mb-4 lamp-glow"></div>
-                  <h3 className="text-xl font-light mb-3">WhatsApp</h3>
-                  <p className="font-light opacity-90 mb-6 text-sm">Atendimento personalizado</p>
+                  <h3 className="text-xl title-luxury text-contrast-light mb-3">WhatsApp</h3>
+                  <p className="text-luxury-light opacity-90 mb-6 text-sm">Atendimento personalizado</p>
                   <a
                     href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block btn-luxury px-6 py-3 font-light text-sm tracking-wide"
+                    className="inline-block btn-luxury px-6 py-3 btn-text-luxury"
                   >
                     Conversar
                   </a>
@@ -138,14 +138,14 @@ export default function Contato() {
               {submitted ? (
                 <div className="text-center py-12">
                   <div className="w-px h-12 bg-accent mx-auto mb-6 lamp-glow"></div>
-                  <h3 className="text-2xl font-light text-luxury-charcoal mb-3">Mensagem Enviada</h3>
-                  <p className="text-luxury-gray font-light">Retornaremos em breve.</p>
+                  <h3 className="text-2xl title-luxury text-contrast-high mb-3">Mensagem Enviada</h3>
+                  <p className="text-luxury-gray text-luxury-light">Retornaremos em breve.</p>
                 </div>
               ) : (
                 <>
                   <div className="mb-10">
                     <div className="w-px h-12 bg-accent mb-6 lamp-glow"></div>
-                    <h2 className="text-2xl font-light text-luxury-charcoal mb-3">
+                    <h2 className="text-2xl title-luxury text-contrast-high mb-3">
                       Envie sua Mensagem
                     </h2>
                   </div>
@@ -160,7 +160,7 @@ export default function Contato() {
                           onChange={handleChange}
                           required
                           placeholder="Nome"
-                          className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-luxury-charcoal placeholder-luxury-light-gray font-light"
+                          className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-contrast-high placeholder-luxury-light-gray text-luxury"
                         />
                       </div>
                       <div>
@@ -171,7 +171,7 @@ export default function Contato() {
                           onChange={handleChange}
                           required
                           placeholder="Email"
-                          className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-luxury-charcoal placeholder-luxury-light-gray font-light"
+                          className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-contrast-high placeholder-luxury-light-gray text-luxury"
                         />
                       </div>
                     </div>
@@ -183,7 +183,7 @@ export default function Contato() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="Telefone"
-                        className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-luxury-charcoal placeholder-luxury-light-gray font-light"
+                        className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 text-contrast-high placeholder-luxury-light-gray text-luxury"
                       />
                     </div>
 
@@ -195,7 +195,7 @@ export default function Contato() {
                         required
                         rows={4}
                         placeholder="Mensagem"
-                        className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 resize-none text-luxury-charcoal placeholder-luxury-light-gray font-light"
+                        className="w-full px-0 py-3 bg-transparent border-b border-border focus:outline-none focus:border-accent transition-all duration-300 resize-none text-contrast-high placeholder-luxury-light-gray text-luxury"
                       />
                     </div>
 
@@ -203,7 +203,7 @@ export default function Contato() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="btn-luxury px-8 py-3 font-light disabled:opacity-50 tracking-wide text-sm"
+                        className="btn-luxury px-8 py-3 btn-text-luxury disabled:opacity-50"
                       >
                         {isSubmitting ? "Enviando..." : "Enviar"}
                       </button>

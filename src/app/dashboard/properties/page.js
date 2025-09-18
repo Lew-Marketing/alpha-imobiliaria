@@ -289,10 +289,10 @@ export default function Properties() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         <div className="py-12 mb-16">
-          <p className="text-xs text-muted-foreground/80 tracking-[0.2em] uppercase font-light mb-4">
+          <p className="label-luxury text-muted-foreground/80 mb-4">
             Nosso Portfólio
           </p>
-          <h1 className="text-3xl lg:text-4xl font-light text-foreground">
+          <h1 className="text-3xl lg:text-4xl title-luxury text-contrast-high">
             Todos os Imóveis
           </h1>
           
@@ -327,7 +327,7 @@ export default function Properties() {
             </p>
             <button 
               onClick={fetchProperties}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="mt-4 px-6 py-3 btn-luxury btn-text-luxury transition-colors"
             >
               Tentar novamente
             </button>
@@ -347,10 +347,10 @@ export default function Properties() {
             <div className="mt-16 pt-8 border-t border-border">
               <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
                 <p>
-                  Exibindo {filteredProperties.length} de {properties.length} {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}
+                  <span className="text-luxury">Exibindo {filteredProperties.length} de {properties.length} {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}</span>
                 </p>
                 <p>
-                  {useSupabase ? 'Dados em tempo real' : 'Dados de demonstração'}
+                  <span className="text-luxury-light">{useSupabase ? 'Dados em tempo real' : 'Dados de demonstração'}</span>
                 </p>
               </div>
             </div>

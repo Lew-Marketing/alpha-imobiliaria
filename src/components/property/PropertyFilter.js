@@ -46,10 +46,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
         {/* Header minimalista */}
         <div className="text-center mb-12">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
-          <h1 className="text-4xl font-light text-pearl-white mb-3 tracking-wide">
+          <h1 className="text-4xl title-luxury text-contrast-light mb-3">
             Encontre Seu Lar
           </h1>
-          <p className="text-luxury-light-gray font-light">
+          <p className="text-luxury-light text-luxury-light-gray">
             {totalProperties} imóveis disponíveis
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
               placeholder="Digite o que procura..."
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-transparent border-b border-border text-luxury-charcoal placeholder-luxury-light-gray focus:outline-none focus:border-accent transition-all duration-300 text-base font-light"
+              className="w-full pl-12 pr-4 py-4 bg-transparent border-b border-border text-contrast-high placeholder-luxury-light-gray focus:outline-none focus:border-accent transition-all duration-300 text-base text-luxury"
             />
           </div>
 
@@ -74,7 +74,7 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
             
             {/* Tipo de imóvel */}
             <div>
-              <label className="block text-xs uppercase tracking-widest text-luxury-gray mb-3 font-medium">
+              <label className="block label-luxury text-luxury-gray mb-3">
                 Tipo
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -82,10 +82,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                   <button
                     key={type.value}
                     onClick={() => handleFilterChange("type", type.value)}
-                    className={`py-3 px-4 text-sm font-light transition-all duration-300 ${
+                    className={`py-3 px-4 btn-text-luxury transition-all duration-300 ${
                       filters.type === type.value
-                        ? "bg-accent text-luxury-charcoal shadow-md"
-                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20"
+                        ? "bg-accent text-contrast-high shadow-md"
+                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20 text-luxury"
                     }`}
                   >
                     {type.label}
@@ -96,7 +96,7 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
 
             {/* Faixa de preço */}
             <div>
-              <label className="block text-xs uppercase tracking-widest text-luxury-gray mb-3 font-medium">
+              <label className="block label-luxury text-luxury-gray mb-3">
                 Preço
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -104,10 +104,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                   <button
                     key={range.value}
                     onClick={() => handleFilterChange("priceRange", range.value)}
-                    className={`py-3 px-4 text-sm font-light transition-all duration-300 ${
+                    className={`py-3 px-4 btn-text-luxury transition-all duration-300 ${
                       filters.priceRange === range.value
-                        ? "bg-accent text-luxury-charcoal shadow-md"
-                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20"
+                        ? "bg-accent text-contrast-high shadow-md"
+                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20 text-luxury"
                     }`}
                   >
                     {range.label}

@@ -26,7 +26,7 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <span className="text-2xl alpha-brand text-luxury-charcoal tracking-tight transition-all duration-300 hover:text-luxury-gray">
+          <span className="text-2xl alpha-brand text-contrast-high tracking-tight transition-all duration-300 hover:text-luxury-gray">
             <span className="alpha-a">A</span>lpha Imobiliária
           </span>
         </Link>
@@ -37,7 +37,7 @@ export default function Header() {
             <Link 
               key={link.href} 
               href={link.href} 
-              className="text-gray-500 hover:text-gray-900 font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105"
+              className="text-luxury-gray hover:text-luxury-charcoal text-luxury font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105"
             >
               {link.label}
             </Link>
@@ -48,13 +48,13 @@ export default function Header() {
         <div className="hidden md:flex items-center space-x-6">
           <Link 
             href="/auth/login" 
-            className="text-gray-500 hover:text-gray-900 font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105"
+            className="text-luxury-gray hover:text-luxury-charcoal text-luxury font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105"
           >
             Entrar
           </Link>
           <Link 
             href="/auth/register" 
-            className="border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 py-2 font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-md"
+            className="border border-luxury-charcoal text-luxury-charcoal hover:bg-luxury-charcoal hover:text-pearl-white px-6 py-2 btn-text-luxury transition-all duration-300 transform hover:scale-105 hover:shadow-md"
           >
             Anunciar Imóvel
           </Link>
@@ -94,7 +94,7 @@ export default function Header() {
                 <Link 
                   key={link.href} 
                   href={link.href} 
-                  className="text-gray-500 hover:text-gray-900 font-light text-base tracking-wide transition-all duration-300 transform hover:translate-x-2"
+                  className="text-luxury-gray hover:text-luxury-charcoal text-luxury font-light text-base tracking-wide transition-all duration-300 transform hover:translate-x-2"
                   onClick={closeMobile}
                 >
                   {link.label}
@@ -105,14 +105,14 @@ export default function Header() {
             <div className="pt-6 border-t border-gray-200 flex flex-col space-y-4">
               <Link 
                 href="/auth/login" 
-                className="text-gray-500 hover:text-gray-900 font-light text-base tracking-wide transition-all duration-300 transform hover:translate-x-2"
+                className="text-luxury-gray hover:text-luxury-charcoal text-luxury font-light text-base tracking-wide transition-all duration-300 transform hover:translate-x-2"
                 onClick={closeMobile}
               >
                 Entrar
               </Link>
               <Link 
                 href="/auth/register" 
-                className="border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 py-3 font-light text-sm tracking-wide transition-all duration-300 text-center transform hover:scale-105"
+                className="border border-luxury-charcoal text-luxury-charcoal hover:bg-luxury-charcoal hover:text-pearl-white px-6 py-3 btn-text-luxury transition-all duration-300 text-center transform hover:scale-105"
                 onClick={closeMobile}
               >
                 Anunciar Imóvel

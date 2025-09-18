@@ -25,10 +25,10 @@ export default function Sobre() {
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="max-w-2xl">
             <div className="w-px h-20 bg-warm-lamp mb-10 lamp-glow"></div>
-            <h1 className="text-6xl font-light tracking-wide mb-8 leading-tight text-pearl-white alpha-brand">
+            <h1 className="text-6xl title-display text-contrast-light mb-8 leading-tight alpha-brand">
               <span className="alpha-a">A</span>lpha<br />Conceito
             </h1>
-            <p className="text-xl font-light leading-relaxed opacity-90 text-pearl-white">
+            <p className="text-xl text-luxury-light leading-relaxed opacity-90 text-pearl-white">
               Confiança e excelência no mercado imobiliário desde 2014
             </p>
           </div>
@@ -42,10 +42,10 @@ export default function Sobre() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-4xl font-light text-luxury-charcoal mb-3 tracking-wide lamp-accent">
+                  <div className="text-4xl title-luxury text-contrast-high mb-3 lamp-accent">
                     {stat.number}
                   </div>
-                  <div className="text-luxury-gray font-light tracking-widest uppercase text-xs">
+                  <div className="text-luxury-gray label-luxury">
                     {stat.label}
                   </div>
                 </div>
@@ -70,12 +70,12 @@ export default function Sobre() {
             <div className="space-y-6">
               <div>
                 <div className="w-px h-12 bg-accent mb-6 lamp-glow"></div>
-                <h2 className="text-4xl font-light text-luxury-charcoal mb-6 leading-tight tracking-wide">
+                <h2 className="text-4xl title-luxury text-contrast-high mb-6 leading-tight">
                   Nossa História
                 </h2>
               </div>
               
-              <div className="space-y-4 text-base text-luxury-gray leading-relaxed font-light">
+              <div className="space-y-4 text-base text-luxury-gray leading-relaxed text-luxury-light">
                 <p>
                   A Alpha Conceito iniciou suas atividades em 2014 com uma visão clara: 
                   construir uma história sólida e confiável no mercado imobiliário.
@@ -117,7 +117,7 @@ export default function Sobre() {
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
-          <h2 className="text-4xl font-light text-pearl-white mb-12 tracking-wide">
+          <h2 className="text-4xl title-luxury text-contrast-light mb-12">
             Nossos Valores
           </h2>
 
@@ -130,10 +130,10 @@ export default function Sobre() {
             ].map((value, index) => (
               <div key={index} className="card-luxury rounded-lg p-6 text-center">
                 <div className="w-px h-6 bg-accent mx-auto mb-4 lamp-glow"></div>
-                <h3 className="text-lg font-light text-luxury-charcoal mb-3 tracking-wide">
+                <h3 className="text-lg title-luxury text-contrast-high mb-3">
                   {value.title}
                 </h3>
-                <p className="text-luxury-gray font-light leading-relaxed text-sm">
+                <p className="text-luxury-gray text-luxury-light leading-relaxed text-sm">
                   {value.desc}
                 </p>
               </div>
@@ -154,17 +154,17 @@ export default function Sobre() {
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-pearl-white">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          <h2 className="text-4xl font-light mb-6 tracking-wide">
+          <h2 className="text-4xl title-luxury text-contrast-light mb-6">
             Vamos Conversar
           </h2>
-          <p className="text-lg font-light mb-10 opacity-90 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-luxury-light mb-10 opacity-90 leading-relaxed max-w-2xl mx-auto">
             Entre em contato e descubra como podemos ajudar você
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/dashboard/contact"
-              className="btn-luxury px-8 py-3 font-light tracking-wide text-sm"
+              className="btn-luxury px-8 py-3 btn-text-luxury"
             >
               Contato
             </a>
@@ -172,7 +172,7 @@ export default function Sobre() {
               href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-pearl-white/30 text-pearl-white px-8 py-3 font-light hover:bg-pearl-white/10 transition-colors tracking-wide text-sm"
+              className="border border-pearl-white/30 text-pearl-white px-8 py-3 btn-text-luxury hover:bg-pearl-white/10 transition-colors"
             >
               WhatsApp
             </a>
