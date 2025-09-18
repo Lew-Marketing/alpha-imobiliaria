@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { formatPrice } from "@/lib/utils";
 
 export default function PropertyCard({ property, isNew = false }) {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Fallback para imagens
-  const getImageUrl = (index = 0) => {
+  const getImageUrl = useCallback((index = 0) => {
     if (property.photos_highlight && property.photos_highlight[index]) {
       return property.photos_highlight[index];
     }
@@ -25,49 +26,62 @@ export default function PropertyCard({ property, isNew = false }) {
     
     const imageIndex = (parseInt(property.property_id) + index) % fallbackImages.length;
     return fallbackImages[imageIndex];
-  };
+  }, [property.photos_highlight, property.property_id]);
 
-  const mainImage = getImageUrl(0);
-  const hoverImage = getImageUrl(1);
+  const mainImage = useMemo(() => getImageUrl(0), [getImageUrl]);
+  const hoverImage = useMemo(() => getImageUrl(1), [getImageUrl]);
+
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
   return (
-    <section className="transition-opacity duration-900 ease-[cubic-bezier(0.17,0.55,0.55,1)] delay-200">
+    <section className="transition-all duration-500 ease-out transform hover:scale-[1.02] will-change-transform">
       <Link
         href={`/dashboard/properties/${property.property_id}`}
-        className="cursor-pointer max-w-xl min-w-sm relative group block"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="cursor-pointer max-w-xl min-w-sm relative group block will-change-transform"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         
-        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm shadow-sm group-hover:shadow-md transition-shadow duration-300">
+        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm shadow-sm group-hover:shadow-lg transition-all duration-500 ease-out will-change-transform">
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-sm" />
+          )}
           <Image
             src={mainImage}
             alt={property.title || "Imóvel"}
             fill
             quality={80}
-            className={`object-cover transition-opacity duration-500 absolute ${isHovered ? "opacity-0" : "opacity-100"}`}
+            className={`object-cover transition-all duration-700 ease-out absolute will-change-transform ${
+              isHovered ? "opacity-0 scale-110" : "opacity-100 scale-100"
+            } ${imageLoaded ? "opacity-100" : "opacity-0"}`}
             onError={() => setImageError(true)}
+            onLoad={() => setImageLoaded(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="lazy"
           />
           <Image
             src={hoverImage}
             alt={property.title || "Imóvel"}
             fill
             quality={80}
-            className={`object-cover transition-opacity duration-500 absolute hidden md:block ${isHovered ? "opacity-100" : "opacity-0"}`}
+            className={`object-cover transition-all duration-700 ease-out absolute hidden md:block will-change-transform ${
+              isHovered ? "opacity-100 scale-110" : "opacity-0 scale-100"
+            }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="lazy"
           />
         </div>
 
         {isNew && (
-          <div className="absolute top-0 left-0 h-10 w-full text-primary before:absolute before:inset-0 before:bg-primary-foreground before:opacity-40">
+          <div className="absolute top-0 left-0 h-10 w-full text-primary before:absolute before:inset-0 before:bg-primary-foreground before:opacity-40 animate-pulse">
             <div className="relative h-full flex items-center px-4">
               <p className="text-xs md:text-sm font-sans uppercase font-medium tracking-wide">New</p>
             </div>
           </div>
         )}
 
-        <div className="mt-4 flex justify-between items-start">
+        <div className="mt-4 flex justify-between items-start transition-all duration-300 group-hover:translate-y-[-2px]">
           <div className="flex flex-col max-w-[60%]">
             <p className="text-base font-serif tracking-normal text-gray-900 truncate">
               {property.title || "Imóvel"}

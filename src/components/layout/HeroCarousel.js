@@ -10,21 +10,33 @@ const images = [
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Preload images for smoother transitions
+    const preloadImages = () => {
+      images.forEach((src) => {
+        const img = new window.Image();
+        img.src = src;
+      });
+      setIsLoaded(true);
+    };
+    
+    preloadImages();
+    
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 5000); // Slightly longer for smoother experience
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[600px] overflow-hidden">
+    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[600px] overflow-hidden will-change-transform">
   
       {images.map((src, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+          className={`absolute inset-0 transition-all duration-1200 ease-in-out will-change-transform ${
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
@@ -34,8 +46,11 @@ export default function HeroCarousel() {
                 src={src}
                 alt={`Propriedade ${index + 1}`}
                 fill
-                className="object-cover"
-                priority
+                className="object-cover will-change-transform"
+                priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+                quality={85}
+                sizes="(max-width: 1024px) 100vw, 60vw"
               />
               
               {/* Overlay sutil */}
@@ -47,7 +62,7 @@ export default function HeroCarousel() {
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`w-8 h-1 transition-all duration-300 ${
+                    className={`w-8 h-1 transition-all duration-500 ease-out ${
                       i === current ? "bg-white" : "bg-white/40 hover:bg-white/60"
                     }`}
                     aria-label={`Ir para slide ${i + 1}`}
@@ -72,7 +87,7 @@ export default function HeroCarousel() {
                 </p>
 
                 <div className="pt-2">
-                  <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-light text-sm tracking-wide transition-all duration-300">
+                  <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105">
                     Ver Imóveis
                   </button>
                 </div>

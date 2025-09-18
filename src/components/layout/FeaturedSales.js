@@ -122,6 +122,8 @@ export default function FeaturedSales() {
       
       // Usar dados mock se Supabase não estiver disponível ou não retornar dados
       console.log('Using mock data for featured properties');
+      // Simulate network delay for smoother loading
+      await new Promise(resolve => setTimeout(resolve, 300));
       setProperties(mockProperties);
       
     } catch (error) {
@@ -151,9 +153,9 @@ export default function FeaturedSales() {
               Carregando os melhores imóveis para você...
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform">
             {[...Array(6)].map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse will-change-transform">
                 <div className="h-48 bg-gray-300"></div>
                 <div className="p-6">
                   <div className="h-4 bg-gray-300 rounded mb-2"></div>
@@ -190,7 +192,7 @@ export default function FeaturedSales() {
           </div>
         )}
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform">
           {properties.map((property) => (
             <PropertyCard key={property.property_id} property={property} />
           ))}
@@ -199,7 +201,7 @@ export default function FeaturedSales() {
         <div className="text-center mt-12">
           <Link 
             href="/dashboard/properties" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg will-change-transform"
           >
             Ver Todos os Imóveis
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
