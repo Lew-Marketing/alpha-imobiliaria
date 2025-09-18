@@ -171,40 +171,50 @@ export default function FeaturedSales() {
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="relative py-16 overflow-hidden">
+      {/* Background elegante */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80')`,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-luxury-cream/95 via-luxury-cream/90 to-luxury-cream/95" />
+      
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+        <div className="relative z-10 text-center mb-12">
+          <div className="w-px h-16 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+          <h2 className="text-3xl title-luxury text-luxury-charcoal mb-4">
             Imóveis em Destaque
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-luxury-gray max-w-2xl mx-auto text-luxury-light">
             Descubra os melhores imóveis selecionados especialmente para você
           </p>
         </div>
 
         {/* Mostrar erro se houver, mas ainda exibir os dados mock */}
         {error && (
-          <div className="mb-8 p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg">
+          <div className="relative z-10 mb-8 p-4 bg-white/90 backdrop-blur-sm border border-warm-lamp/30 rounded-lg shadow-lg">
             <p className="text-sm">
-              <strong>Aviso:</strong> Não foi possível conectar ao banco de dados. 
+              <strong className="text-warm-lamp">Aviso:</strong> Não foi possível conectar ao banco de dados. 
               Exibindo dados de exemplo. ({error})
             </p>
           </div>
         )}
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform">
           {properties.map((property) => (
             <PropertyCard key={property.property_id} property={property} />
           ))}
         </div>
         
-        <div className="text-center mt-12">
+        <div className="relative z-10 text-center mt-12">
           <Link 
             href="/dashboard/properties" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg will-change-transform"
+            className="btn-luxury px-8 py-3 btn-text-luxury inline-flex items-center gap-2"
           >
             Ver Todos os Imóveis
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
