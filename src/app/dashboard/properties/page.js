@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import { supabase, checkConnection } from "@/lib/supabaseClient";
 import PropertyCard from "@/components/property/PropertyCard";
 
+// Função para verificar se o Supabase está configurado
+const isSupabaseConfigured = () => {
+  return process.env.NEXT_PUBLIC_SUPABASE_URL && 
+         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+};
+
 // Mock data expandido para demonstração
 const mockProperties = [
   {
@@ -106,58 +112,82 @@ const mockProperties = [
 export default function Properties() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [useSupabase, setUseSupabase] = useState(true);
+  const [error, setError] = useState(null);
+  const [useSupabase, setUseSupabase] = useState(false);
 
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const isConnected = await checkConnection();
-        
-        if (isConnected) {
-          const { data, error } = await supabase
-            .from("properties")
-            .select("*")
-            .eq("has_photos", true)
-            .order("created_at", { ascending: false });
+  const fetchProperties = async () => {
+    setLoading(true);
+    setError(null);
 
-          if (error) throw error;
-
-          if (data && data.length > 0) {
-            const processed = data.map((p) => ({
-              ...p,
-              photos_highlight: p.photos_highlight || [
-                `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/fachada.jpg`,
-                `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${p.property_id}/sala.jpg`
-              ]
-            }));
-            setProperties(processed);
-          } else {
-            setProperties(mockProperties);
-          }
-        } else {
-          setUseSupabase(false);
-          setProperties(mockProperties);
-        }
-      } catch (err) {
-        console.warn("Erro ao buscar imóveis, usando dados mock:", err);
+    try {
+      // Verificar se o Supabase está configurado
+      if (!isSupabaseConfigured()) {
+        console.log("Supabase não configurado, usando dados mock");
         setUseSupabase(false);
         setProperties(mockProperties);
-      } finally {
-        setLoading(false);
+        return;
       }
-    };
 
+      // Tentar conectar ao Supabase
+      const isConnected = await checkConnection();
+      
+      if (isConnected) {
+        const { data, error } = await supabase
+          .from("properties")
+          .select("*")
+          .eq("has_photos", true)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.warn("Erro na query Supabase:", error.message);
+          throw new Error(error.message);
+        }
+
+        if (data && data.length > 0) {
+          // Processar dados do Supabase
+          const processed = data.map((property) => ({
+            ...property,
+            photos_highlight: property.photos_highlight || [
+              `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${property.property_id}/fachada.jpg`,
+              `https://ijmupkeqsqxrtbdidovc.supabase.co/storage/v1/object/public/imoveis-alpha/photos_highlight/${property.property_id}/sala.jpg`
+            ]
+          }));
+          
+          setProperties(processed);
+          setUseSupabase(true);
+          console.log(`${processed.length} imóveis carregados do Supabase`);
+        } else {
+          // Supabase conectado mas sem dados
+          console.log("Supabase conectado mas sem dados, usando mock");
+          setUseSupabase(true);
+          setProperties(mockProperties);
+        }
+      } else {
+        // Supabase não conseguiu conectar
+        throw new Error("Não foi possível conectar ao Supabase");
+      }
+    } catch (err) {
+      console.warn("Erro ao buscar imóveis:", err.message);
+      setError(err.message);
+      setUseSupabase(false);
+      setProperties(mockProperties);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchProperties();
   }, []);
 
+  // Loading skeleton
   if (loading) {
     return (
       <div className="bg-background min-h-screen py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
-            <h1 className="text-3xl lg:text-4xl font-light text-foreground">
-              Todos os Imóveis
-            </h1>
+            <div className="h-4 bg-border rounded w-32 mb-4 animate-pulse"></div>
+            <div className="h-8 bg-border rounded w-64 animate-pulse"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             {[...Array(6)].map((_, i) => (
@@ -177,7 +207,7 @@ export default function Properties() {
   return (
     <div className="bg-background min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
+        
         <div className="mb-16">
           <p className="text-xs text-muted-foreground/80 tracking-[0.2em] uppercase font-light mb-4">
             Nosso Portfólio
@@ -185,25 +215,66 @@ export default function Properties() {
           <h1 className="text-3xl lg:text-4xl font-light text-foreground">
             Todos os Imóveis
           </h1>
-          {!useSupabase && (
+          
+          {/* Status do sistema */}
+          {error && !useSupabase && (
+            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-700">
+                <span className="font-medium">Aviso:</span> Usando dados de demonstração. 
+                {error && ` (${error})`}
+              </p>
+            </div>
+          )}
+          
+          {!useSupabase && !error && (
             <p className="text-sm text-muted-foreground mt-2">
               Dados de demonstração - Configure Supabase para dados reais
             </p>
           )}
+          
+          {useSupabase && (
+            <p className="text-sm text-green-600 mt-2">
+              ✓ Conectado ao banco de dados
+            </p>
+          )}
         </div>
 
+        {/* Lista de propriedades */}
         {properties.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-muted-foreground font-light text-lg">
               Nenhum imóvel encontrado.
             </p>
+            <button 
+              onClick={fetchProperties}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Tentar novamente
+            </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-            {properties.map((property) => (
-              <PropertyCard key={property.property_id} property={property} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+              {properties.map((property) => (
+                <PropertyCard 
+                  key={property.property_id || property.id} 
+                  property={property} 
+                />
+              ))}
+            </div>
+            
+            {/* Footer com informações */}
+            <div className="mt-16 pt-8 border-t border-border">
+              <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
+                <p>
+                  Exibindo {properties.length} {properties.length === 1 ? 'imóvel' : 'imóveis'}
+                </p>
+                <p>
+                  {useSupabase ? 'Dados em tempo real' : 'Dados de demonstração'}
+                </p>
+              </div>
+            </div>
+          </>
         )}
 
       </div>
