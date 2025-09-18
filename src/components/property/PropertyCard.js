@@ -127,10 +127,8 @@ export default function PropertyCard({ property, isNew = false }) {
             </div>
           </div>
         </div>
-      </Link>
-    </section>
-  );
-}
+        
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-sm" />
           )}
