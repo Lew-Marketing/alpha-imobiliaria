@@ -127,64 +127,6 @@ export default function PropertyCard({ property, isNew = false }) {
             </div>
           </div>
         </div>
-        
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-sm" />
-          )}
-          <Image
-            src={mainImage}
-            alt={property.title || "Imóvel"}
-            fill
-            quality={80}
-            className={`object-cover transition-all duration-700 ease-out absolute will-change-transform ${
-              isHovered ? "opacity-0 scale-110" : "opacity-100 scale-100"
-            } ${imageLoaded ? "opacity-100" : "opacity-0"}`}
-            onError={() => setImageError(true)}
-            onLoad={() => setImageLoaded(true)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            loading="lazy"
-          />
-          <Image
-            src={hoverImage}
-            alt={property.title || "Imóvel"}
-            fill
-            quality={80}
-            className={`object-cover transition-all duration-700 ease-out absolute hidden md:block will-change-transform ${
-              isHovered ? "opacity-100 scale-110" : "opacity-0 scale-100"
-            }`}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            loading="lazy"
-          />
-        </div>
-
-        {isNew && (
-          <div className="absolute top-0 left-0 h-10 w-full text-primary before:absolute before:inset-0 before:bg-primary-foreground before:opacity-40 animate-pulse">
-            <div className="relative h-full flex items-center px-4">
-              <p className="text-xs md:text-sm font-sans uppercase font-medium tracking-wide">New</p>
-            </div>
-          </div>
-        )}
-
-        <div className="mt-4 flex justify-between items-start transition-all duration-300 group-hover:translate-y-[-2px]">
-          <div className="flex flex-col max-w-[60%]">
-            <p className="text-base font-serif tracking-normal text-gray-900 truncate">
-              {property.title || "Imóvel"}
-            </p>
-            <p className="text-sm font-serif tracking-normal text-gray-500 mt-1 truncate">
-              {property.location || "Localização"}
-            </p>
-          </div>
-
-          <div className="flex flex-col items-end">
-            <p className="text-base font-sans font-medium tracking-wider text-gray-900">
-              {formatPrice(property.sale_price)}
-            </p>
-            <p className="text-sm font-sans text-gray-500 mt-1">
-              {property.financing_compatible ? "Financiável" : "À Vista"}
-            </p>
-          </div>
-        </div>
       </Link>
     </section>
   );
