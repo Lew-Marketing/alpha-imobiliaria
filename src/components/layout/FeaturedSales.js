@@ -1,45 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { supabase, checkConnection } from "@/lib/supabaseClient";
 import PropertyCard from "@/components/property/PropertyCard";
+
+// Função para verificar se o Supabase está configurado
+const isSupabaseConfigured = () => {
+  return process.env.NEXT_PUBLIC_SUPABASE_URL && 
+         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+};
 
 export default function FeaturedSales() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [useSupabase, setUseSupabase] = useState(true);
-
-  const fetchFeaturedProperties = async () => {
-    setLoading(true);
-    try {
-      // Verificar se o Supabase está configurado antes de tentar conectar
-      if (isSupabaseConfigured) {
-        const isConnected = await checkConnection();
-        
-        if (isConnected) {
-          const { data, error } = await supabase
-            .from('properties')
-            .select('*')
-            .eq('featured', true)
-            .limit(6);
-          
-          if (!error && data) {
-            setProperties(data);
-            setLoading(false);
-            return;
-          }
-        }
-      }
-      
-      // Usar dados mock se Supabase não estiver disponível
-      console.log('Using mock data for featured properties');
-      setProperties(mockProperties);
-    } catch (error) {
-      console.warn('Error fetching properties:', error.message);
-      setProperties(mockProperties);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [error, setError] = useState(null);
 
   // Dados mock para desenvolvimento
   const mockProperties = [
@@ -117,10 +91,54 @@ export default function FeaturedSales() {
     }
   ];
 
+  const fetchFeaturedProperties = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      // Verificar se o Supabase está configurado
+      if (isSupabaseConfigured()) {
+        const isConnected = await checkConnection();
+        
+        if (isConnected) {
+          const { data, error } = await supabase
+            .from('properties')
+            .select('*')
+            .eq('featured', true)
+            .limit(6);
+          
+          if (error) {
+            console.warn('Supabase query error:', error.message);
+            throw new Error(error.message);
+          }
+          
+          if (data && data.length > 0) {
+            setProperties(data);
+            setLoading(false);
+            return;
+          }
+        }
+      }
+      
+      // Usar dados mock se Supabase não estiver disponível ou não retornar dados
+      console.log('Using mock data for featured properties');
+      setProperties(mockProperties);
+      
+    } catch (error) {
+      console.warn('Error fetching properties:', error.message);
+      setError(error.message);
+      // Fallback para dados mock em caso de erro
+      setProperties(mockProperties);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchFeaturedProperties();
   }, []);
 
+  // Loading skeleton
   if (loading) {
     return (
       <section className="py-16 bg-gray-50">
@@ -161,6 +179,16 @@ export default function FeaturedSales() {
             Descubra os melhores imóveis selecionados especialmente para você
           </p>
         </div>
+
+        {/* Mostrar erro se houver, mas ainda exibir os dados mock */}
+        {error && (
+          <div className="mb-8 p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg">
+            <p className="text-sm">
+              <strong>Aviso:</strong> Não foi possível conectar ao banco de dados. 
+              Exibindo dados de exemplo. ({error})
+            </p>
+          </div>
+        )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property) => (
