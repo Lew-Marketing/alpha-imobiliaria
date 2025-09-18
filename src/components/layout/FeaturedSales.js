@@ -18,7 +18,7 @@ export default function FeaturedSales() {
   // Dados mock para desenvolvimento
   const mockProperties = [
     {
-      id: 1,
+      property_id: 1,
       title: "Casa Moderna em Condomínio",
       price: 850000,
       location: "Alphaville, Barueri",
@@ -30,7 +30,7 @@ export default function FeaturedSales() {
       type: "Casa"
     },
     {
-      id: 2,
+      property_id: 2,
       title: "Apartamento Luxuoso Vista Mar",
       price: 1200000,
       location: "Riviera de São Lourenço",
@@ -42,7 +42,7 @@ export default function FeaturedSales() {
       type: "Apartamento"
     },
     {
-      id: 3,
+      property_id: 3,
       title: "Sobrado Familiar Completo",
       price: 650000,
       location: "Vila Madalena, São Paulo",
@@ -54,7 +54,7 @@ export default function FeaturedSales() {
       type: "Sobrado"
     },
     {
-      id: 4,
+      property_id: 4,
       title: "Cobertura Duplex Premium",
       price: 2500000,
       location: "Jardins, São Paulo",
@@ -66,7 +66,7 @@ export default function FeaturedSales() {
       type: "Cobertura"
     },
     {
-      id: 5,
+      property_id: 5,
       title: "Casa de Campo Aconchegante",
       price: 450000,
       location: "Campos do Jordão",
@@ -78,7 +78,7 @@ export default function FeaturedSales() {
       type: "Casa"
     },
     {
-      id: 6,
+      property_id: 6,
       title: "Loft Industrial Moderno",
       price: 380000,
       location: "Vila Olímpia, São Paulo",
@@ -192,7 +192,7 @@ export default function FeaturedSales() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
+            <PropertyCard key={property.property_id} property={property} />
           ))}
         </div>
         
