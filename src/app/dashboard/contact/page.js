@@ -40,111 +40,114 @@ export default function Contato() {
   };
 
   return (
-    <div className="min-h-screen bg-warm-white">
+    <div className="min-h-screen">
       
-      {/* Hero minimalista */}
-      <section className="relative bg-gradient-to-b from-leather-dark to-leather-medium text-warm-white">
-        <div className="max-w-4xl mx-auto px-8 py-32 text-center">
-          <h1 className="text-5xl md:text-6xl font-light mb-8 tracking-tight leading-tight">
+      {/* Hero com imagem de fundo elegante */}
+      <section className="relative h-screen flex items-center justify-center">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&q=80')`,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-leather-dark/80 via-leather-medium/70 to-leather-light/60" />
+        
+        <div className="relative z-10 text-center text-cream max-w-4xl mx-auto px-8">
+          <div className="w-1 h-24 bg-cream mx-auto mb-12"></div>
+          <h1 className="text-6xl md:text-7xl font-light mb-8 tracking-tight">
             Contato
           </h1>
-          <p className="text-xl font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl font-light opacity-90 leading-relaxed">
             Vamos conversar sobre seu próximo lar
           </p>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-8 -mt-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-          
-          {/* Informações elegantes */}
-          <div className="lg:col-span-2 space-y-12">
+      {/* Seção principal com transparências */}
+      <section className="relative -mt-32 z-20">
+        <div className="max-w-6xl mx-auto px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
-            {/* Endereço */}
-            <div className="bg-white/80 backdrop-blur-sm p-8 border border-soft-beige">
-              <div className="w-1 h-12 bg-accent mb-6"></div>
-              <h3 className="text-lg font-light text-leather-dark mb-4 tracking-wide">Escritório</h3>
-              <p className="text-leather-medium leading-relaxed">
-                Av. Pacífico, 731<br />
-                Cidade Alpha, Sala 305<br />
-                Eusébio, CE
-              </p>
-              <p className="text-xs text-leather-light mt-4 tracking-widest uppercase">CRECI 1167J</p>
-            </div>
+            {/* Informações com fundo transparente */}
+            <div className="space-y-8">
+              
+              {/* Card principal */}
+              <div className="bg-white/90 backdrop-blur-md p-12 border border-white/20 shadow-2xl">
+                <div className="w-1 h-16 bg-accent mb-8"></div>
+                <h2 className="text-2xl font-light text-leather-dark mb-8 tracking-wide">
+                  Alpha Conceito
+                </h2>
+                
+                <div className="space-y-6 text-leather-medium font-light">
+                  <div>
+                    <p className="text-sm uppercase tracking-widest text-leather-light mb-2">Endereço</p>
+                    <p>Av. Pacífico, 731, Sala 305<br />Cidade Alpha, Eusébio, CE</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm uppercase tracking-widest text-leather-light mb-2">Telefones</p>
+                    <a href="tel:+558541413632" className="block hover:text-leather-dark transition-colors">
+                      (85) 4141-3632
+                    </a>
+                    <a href="tel:+5585996353513" className="block hover:text-leather-dark transition-colors">
+                      (85) 99635-3513
+                    </a>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm uppercase tracking-widest text-leather-light mb-2">Email</p>
+                    <a 
+                      href="mailto:comercialalphaconceito@gmail.com" 
+                      className="hover:text-leather-dark transition-colors"
+                    >
+                      comercialalphaconceito@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
 
-            {/* Contatos */}
-            <div className="bg-white/80 backdrop-blur-sm p-8 border border-soft-beige">
-              <div className="w-1 h-12 bg-accent mb-6"></div>
-              <h3 className="text-lg font-light text-leather-dark mb-6 tracking-wide">Fale Conosco</h3>
-              <div className="space-y-4">
-                <div>
-                  <a href="tel:+558541413632" className="text-leather-medium hover:text-leather-dark transition-colors font-light">
-                    (85) 4141-3632
-                  </a>
-                </div>
-                <div>
-                  <a href="tel:+5585996353513" className="text-leather-medium hover:text-leather-dark transition-colors font-light">
-                    (85) 99635-3513
-                  </a>
-                </div>
-                <div>
-                  <a 
-                    href="mailto:comercialalphaconceito@gmail.com" 
-                    className="text-leather-medium hover:text-leather-dark transition-colors font-light"
+              {/* WhatsApp destacado */}
+              <div className="relative">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center rounded"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800&q=80')`,
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-accent/90 to-leather-medium/80 rounded" />
+                
+                <div className="relative z-10 p-12 text-cream">
+                  <div className="w-1 h-12 bg-cream mb-6"></div>
+                  <h3 className="text-xl font-light mb-4">WhatsApp</h3>
+                  <p className="font-light opacity-90 mb-8">Atendimento personalizado</p>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-cream text-leather-dark px-8 py-3 font-light hover:bg-white transition-colors tracking-wide"
                   >
-                    comercialalphaconceito@gmail.com
+                    Conversar
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Horário */}
-            <div className="bg-white/80 backdrop-blur-sm p-8 border border-soft-beige">
-              <div className="w-1 h-12 bg-accent mb-6"></div>
-              <h3 className="text-lg font-light text-leather-dark mb-6 tracking-wide">Horário</h3>
-              <div className="space-y-2 text-leather-medium font-light">
-                <p>Segunda a Sexta: 8h às 18h</p>
-                <p>Sábado: 8h às 12h</p>
-              </div>
-            </div>
-
-            {/* WhatsApp discreto */}
-            <div className="bg-gradient-to-r from-accent to-leather-medium text-warm-white p-8">
-              <h3 className="text-lg font-light mb-4 tracking-wide">WhatsApp</h3>
-              <p className="font-light opacity-90 mb-6">Atendimento personalizado</p>
-              <a
-                href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-warm-white text-leather-dark px-8 py-3 font-light hover:bg-cream transition-colors tracking-wide"
-              >
-                Conversar
-              </a>
-            </div>
-          </div>
-
-          {/* Formulário minimalista */}
-          <div className="lg:col-span-3">
-            <div className="bg-white/80 backdrop-blur-sm p-12 border border-soft-beige">
+            {/* Formulário com transparência */}
+            <div className="bg-white/95 backdrop-blur-md p-12 border border-white/20 shadow-2xl">
               
               {submitted ? (
                 <div className="text-center py-16">
                   <div className="w-1 h-16 bg-accent mx-auto mb-8"></div>
-                  <h3 className="text-2xl font-light text-leather-dark mb-4 tracking-wide">Mensagem Enviada</h3>
-                  <p className="text-leather-medium font-light">
-                    Retornaremos em breve.
-                  </p>
+                  <h3 className="text-2xl font-light text-leather-dark mb-4">Mensagem Enviada</h3>
+                  <p className="text-leather-medium font-light">Retornaremos em breve.</p>
                 </div>
               ) : (
                 <>
                   <div className="mb-12">
                     <div className="w-1 h-16 bg-accent mb-8"></div>
-                    <h2 className="text-2xl font-light text-leather-dark mb-4 tracking-wide">
+                    <h2 className="text-2xl font-light text-leather-dark mb-4">
                       Envie sua Mensagem
                     </h2>
-                    <p className="text-leather-medium font-light">
-                      Preencha os campos abaixo
-                    </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-8">
@@ -157,7 +160,7 @@ export default function Contato() {
                           onChange={handleChange}
                           required
                           placeholder="Nome"
-                          className="w-full px-0 py-4 bg-transparent border-0 border-b border-soft-beige focus:outline-none focus:border-leather-medium transition-colors text-foreground placeholder-leather-light font-light"
+                          className="w-full px-0 py-4 bg-transparent border-0 border-b border-leather-light/30 focus:outline-none focus:border-leather-medium transition-colors text-leather-dark placeholder-leather-light font-light"
                         />
                       </div>
                       <div>
@@ -168,7 +171,7 @@ export default function Contato() {
                           onChange={handleChange}
                           required
                           placeholder="Email"
-                          className="w-full px-0 py-4 bg-transparent border-0 border-b border-soft-beige focus:outline-none focus:border-leather-medium transition-colors text-foreground placeholder-leather-light font-light"
+                          className="w-full px-0 py-4 bg-transparent border-0 border-b border-leather-light/30 focus:outline-none focus:border-leather-medium transition-colors text-leather-dark placeholder-leather-light font-light"
                         />
                       </div>
                     </div>
@@ -180,7 +183,7 @@ export default function Contato() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="Telefone"
-                        className="w-full px-0 py-4 bg-transparent border-0 border-b border-soft-beige focus:outline-none focus:border-leather-medium transition-colors text-foreground placeholder-leather-light font-light"
+                        className="w-full px-0 py-4 bg-transparent border-0 border-b border-leather-light/30 focus:outline-none focus:border-leather-medium transition-colors text-leather-dark placeholder-leather-light font-light"
                       />
                     </div>
 
@@ -192,7 +195,7 @@ export default function Contato() {
                         required
                         rows={4}
                         placeholder="Mensagem"
-                        className="w-full px-0 py-4 bg-transparent border-0 border-b border-soft-beige focus:outline-none focus:border-leather-medium transition-colors resize-none text-foreground placeholder-leather-light font-light"
+                        className="w-full px-0 py-4 bg-transparent border-0 border-b border-leather-light/30 focus:outline-none focus:border-leather-medium transition-colors resize-none text-leather-dark placeholder-leather-light font-light"
                       />
                     </div>
 
@@ -200,7 +203,7 @@ export default function Contato() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-leather-dark text-warm-white px-12 py-4 font-light hover:bg-leather-medium transition-all duration-300 disabled:opacity-50 tracking-wide"
+                        className="bg-leather-dark text-cream px-12 py-4 font-light hover:bg-leather-medium transition-all duration-300 disabled:opacity-50 tracking-wide"
                       >
                         {isSubmitting ? "Enviando..." : "Enviar"}
                       </button>
@@ -211,7 +214,7 @@ export default function Contato() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Espaçamento final */}
       <div className="h-32"></div>
