@@ -87,9 +87,15 @@ export default function HeroCarousel() {
                 </p>
 
                 <div className="pt-2">
-                  <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-light text-sm tracking-wide transition-all duration-300 transform hover:scale-105">
+                  <Link 
+                    href="/dashboard/properties"
+                    className="inline-flex items-center gap-2 px-8 py-3 btn-luxury font-light text-sm tracking-wide"
+                  >
                     Ver Imóveis
-                  </button>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
             </div>

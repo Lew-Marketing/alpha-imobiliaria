@@ -26,8 +26,8 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <span className="text-2xl font-light text-gray-900 tracking-tight transition-all duration-300 hover:text-gray-700">
-            Alpha Imobiliária
+          <span className="text-2xl alpha-brand text-luxury-charcoal tracking-tight transition-all duration-300 hover:text-luxury-gray">
+            <span className="alpha-a">A</span>lpha Imobiliária
           </span>
         </Link>
 

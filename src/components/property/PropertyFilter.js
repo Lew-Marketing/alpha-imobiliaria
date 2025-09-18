@@ -1,12 +1,12 @@
 "use client";
 import { useState, useCallback } from "react";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search } from "lucide-react";
 
-const QUICK_FILTERS = [
+const PROPERTY_TYPES = [
   { value: "all", label: "Todos" },
   { value: "house", label: "Casas" },
   { value: "apartment", label: "Apartamentos" },
-  { value: "luxury", label: "Luxo" },
+  { value: "commercial", label: "Comercial" },
 ];
 
 const PRICE_RANGES = [
@@ -29,104 +29,98 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
     onFilterChange(newFilters);
   }, [filters, onFilterChange]);
 
-  const clearFilters = useCallback(() => {
-    const clearedFilters = {
-      search: "",
-      type: "all", 
-      priceRange: "all",
-    };
-    setFilters(clearedFilters);
-    onFilterChange(clearedFilters);
-  }, [onFilterChange]);
-
-  const hasActiveFilters = Object.values(filters).some(value => value !== "all" && value !== "");
-
   return (
     <div className="relative">
-      {/* Background com overlay elegante */}
+      {/* Background elegante */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=80')`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-leather-dark/95 via-leather-medium/90 to-leather-light/85 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-gradient-to-br from-luxury-charcoal/90 via-luxury-gray/80 to-luxury-charcoal/85" />
       
       {/* Conteúdo */}
-      <div className="relative z-10 max-w-6xl mx-auto px-8 py-16">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
         
         {/* Header minimalista */}
         <div className="text-center mb-12">
-          <div className="w-1 h-16 bg-cream mx-auto mb-6"></div>
-          <h1 className="text-4xl font-light text-cream mb-4 tracking-tight">
+          <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
+          <h1 className="text-4xl font-light text-pearl-white mb-3 tracking-wide">
             Encontre Seu Lar
           </h1>
-          <p className="text-leather-light font-light">
+          <p className="text-luxury-light-gray font-light">
             {totalProperties} imóveis disponíveis
           </p>
         </div>
 
-        {/* Filtro principal simplificado */}
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8">
+        {/* Filtro compacto e elegante */}
+        <div className="card-luxury rounded-lg p-8">
           
           {/* Busca principal */}
           <div className="relative mb-8">
-            <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-cream/70 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gray w-5 h-5" />
             <input
               type="text"
               placeholder="Digite o que procura..."
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
-              className="w-full pl-16 pr-8 py-6 bg-white/5 border border-white/30 text-cream placeholder-cream/60 focus:outline-none focus:border-cream/60 transition-all duration-300 text-lg font-light backdrop-blur-sm"
+              className="w-full pl-12 pr-4 py-4 bg-transparent border-b border-border text-luxury-charcoal placeholder-luxury-light-gray focus:outline-none focus:border-accent transition-all duration-300 text-base font-light"
             />
           </div>
 
-          {/* Filtros rápidos */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {QUICK_FILTERS.map(filter => (
-              <button
-                key={filter.value}
-                onClick={() => handleFilterChange("type", filter.value)}
-                className={`py-4 px-6 border transition-all duration-300 font-light tracking-wide ${
-                  filters.type === filter.value
-                    ? "border-cream bg-cream/20 text-cream"
-                    : "border-white/30 text-cream/80 hover:border-cream/60 hover:bg-white/5"
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Faixa de preço */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {PRICE_RANGES.map(range => (
-              <button
-                key={range.value}
-                onClick={() => handleFilterChange("priceRange", range.value)}
-                className={`py-4 px-6 border transition-all duration-300 font-light tracking-wide ${
-                  filters.priceRange === range.value
-                    ? "border-cream bg-cream/20 text-cream"
-                    : "border-white/30 text-cream/80 hover:border-cream/60 hover:bg-white/5"
-                }`}
-              >
-                {range.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Limpar filtros */}
-          {hasActiveFilters && (
-            <div className="text-center mt-8">
-              <button
-                onClick={clearFilters}
-                className="inline-flex items-center gap-2 text-cream/80 hover:text-cream transition-colors font-light"
-              >
-                <X className="w-4 h-4" />
-                Limpar filtros
-              </button>
+          {/* Filtros em grid compacto */}
+          <div className="grid grid-cols-2 gap-6">
+            
+            {/* Tipo de imóvel */}
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-luxury-gray mb-3 font-medium">
+                Tipo
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {PROPERTY_TYPES.map(type => (
+                  <button
+                    key={type.value}
+                    onClick={() => handleFilterChange("type", type.value)}
+                    className={`py-3 px-4 text-sm font-light transition-all duration-300 ${
+                      filters.type === type.value
+                        ? "bg-accent text-luxury-charcoal shadow-md"
+                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20"
+                    }`}
+                  >
+                    {type.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
+
+            {/* Faixa de preço */}
+            <div>
+              <label className="block text-xs uppercase tracking-widest text-luxury-gray mb-3 font-medium">
+                Preço
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {PRICE_RANGES.map(range => (
+                  <button
+                    key={range.value}
+                    onClick={() => handleFilterChange("priceRange", range.value)}
+                    className={`py-3 px-4 text-sm font-light transition-all duration-300 ${
+                      filters.priceRange === range.value
+                        ? "bg-accent text-luxury-charcoal shadow-md"
+                        : "bg-secondary text-luxury-gray hover:bg-warm-lamp/20"
+                    }`}
+                  >
+                    {range.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Detalhe decorativo */}
+          <div className="mt-8 flex justify-center">
+            <div className="w-12 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+          </div>
         </div>
       </div>
     </div>
