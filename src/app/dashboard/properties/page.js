@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { supabase, checkConnection } from "@/lib/supabaseClient";
 import PropertyCard from "@/components/property/PropertyCard";
+import PropertyFilter from "@/components/property/PropertyFilter";
 
 // Função para verificar se o Supabase está configurado
 const isSupabaseConfigured = () => {
@@ -114,6 +115,8 @@ export default function Properties() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [useSupabase, setUseSupabase] = useState(false);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [filters, setFilters] = useState({});
 
   const fetchProperties = async () => {
     setLoading(true);
@@ -176,16 +179,88 @@ export default function Properties() {
     }
   };
 
+  // Função para filtrar propriedades
+  const filterProperties = (properties, filters) => {
+    return properties.filter(property => {
+      // Filtro de busca por texto
+      if (filters.search) {
+        const searchTerm = filters.search.toLowerCase();
+        const matchesSearch = 
+          property.title?.toLowerCase().includes(searchTerm) ||
+          property.location?.toLowerCase().includes(searchTerm) ||
+          property.description?.toLowerCase().includes(searchTerm);
+        if (!matchesSearch) return false;
+      }
+
+      // Filtro por tipo
+      if (filters.type && filters.type !== "all") {
+        if (property.type?.toLowerCase() !== filters.type) return false;
+      }
+
+      // Filtro por faixa de preço
+      if (filters.priceRange && filters.priceRange !== "all") {
+        const price = property.sale_price || 0;
+        const [min, max] = filters.priceRange.split("-").map(p => p.replace("+", ""));
+        const minPrice = parseInt(min) || 0;
+        const maxPrice = max ? parseInt(max) : Infinity;
+        
+        if (price < minPrice || price > maxPrice) return false;
+      }
+
+      // Filtro por localização
+      if (filters.location && filters.location !== "all") {
+        const location = property.location?.toLowerCase() || "";
+        if (!location.includes(filters.location.toLowerCase())) return false;
+      }
+
+      // Filtro por quartos
+      if (filters.bedrooms && filters.bedrooms !== "all") {
+        const bedrooms = property.bedrooms || 0;
+        const filterBedrooms = parseInt(filters.bedrooms);
+        if (filters.bedrooms === "4" && bedrooms < 4) return false;
+        if (filters.bedrooms !== "4" && bedrooms !== filterBedrooms) return false;
+      }
+
+      // Filtro por vagas
+      if (filters.parking && filters.parking !== "all") {
+        const parking = property.parking_spaces || 0;
+        const filterParking = parseInt(filters.parking);
+        if (filters.parking === "3" && parking < 3) return false;
+        if (filters.parking !== "3" && parking !== filterParking) return false;
+      }
+
+      // Filtro por financiamento
+      if (filters.financing && filters.financing !== "all") {
+        const hasFinancing = property.financing_compatible;
+        if (filters.financing === "yes" && !hasFinancing) return false;
+        if (filters.financing === "no" && hasFinancing) return false;
+      }
+
+      return true;
+    });
+  };
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    const filtered = filterProperties(properties, newFilters);
+    setFilteredProperties(filtered);
+  };
   useEffect(() => {
     fetchProperties();
   }, []);
 
+  useEffect(() => {
+    const filtered = filterProperties(properties, filters);
+    setFilteredProperties(filtered);
+  }, [properties, filters]);
+
   // Loading skeleton
   if (loading) {
     return (
-      <div className="bg-background min-h-screen py-20">
+      <div className="bg-background min-h-screen">
+        <PropertyFilter onFilterChange={handleFilterChange} totalProperties={0} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-12">
+          <div className="py-12 mb-12">
             <div className="h-4 bg-border rounded w-32 mb-4 animate-pulse"></div>
             <div className="h-8 bg-border rounded w-64 animate-pulse"></div>
           </div>
@@ -205,10 +280,15 @@ export default function Properties() {
   }
 
   return (
-    <div className="bg-background min-h-screen py-20">
+    <div className="bg-background min-h-screen">
+      <PropertyFilter 
+        onFilterChange={handleFilterChange} 
+        totalProperties={filteredProperties.length} 
+      />
+      
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
-        <div className="mb-16">
+        <div className="py-12 mb-16">
           <p className="text-xs text-muted-foreground/80 tracking-[0.2em] uppercase font-light mb-4">
             Nosso Portfólio
           </p>
@@ -240,10 +320,10 @@ export default function Properties() {
         </div>
 
         {/* Lista de propriedades */}
-        {properties.length === 0 ? (
+        {filteredProperties.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-muted-foreground font-light text-lg">
-              Nenhum imóvel encontrado.
+              {properties.length === 0 ? "Nenhum imóvel encontrado." : "Nenhum imóvel corresponde aos filtros selecionados."}
             </p>
             <button 
               onClick={fetchProperties}
@@ -255,7 +335,7 @@ export default function Properties() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-              {properties.map((property) => (
+              {filteredProperties.map((property) => (
                 <PropertyCard 
                   key={property.property_id || property.id} 
                   property={property} 
@@ -267,7 +347,7 @@ export default function Properties() {
             <div className="mt-16 pt-8 border-t border-border">
               <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
                 <p>
-                  Exibindo {properties.length} {properties.length === 1 ? 'imóvel' : 'imóveis'}
+                  Exibindo {filteredProperties.length} de {properties.length} {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}
                 </p>
                 <p>
                   {useSupabase ? 'Dados em tempo real' : 'Dados de demonstração'}
