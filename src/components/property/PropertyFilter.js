@@ -1,9 +1,9 @@
 "use client";
 import { useState, useCallback } from "react";
-import { Search, SlidersHorizontal, X, MapPin, Home, DollarSign, Bed, Car } from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 
 const PROPERTY_TYPES = [
-  { value: "all", label: "Todos os tipos" },
+  { value: "all", label: "Todos" },
   { value: "house", label: "Casa" },
   { value: "apartment", label: "Apartamento" },
   { value: "condo", label: "Condomínio" },
@@ -12,21 +12,20 @@ const PROPERTY_TYPES = [
 ];
 
 const PRICE_RANGES = [
-  { value: "all", label: "Qualquer preço" },
-  { value: "0-300000", label: "Até R$ 300.000" },
-  { value: "300000-500000", label: "R$ 300.000 - R$ 500.000" },
-  { value: "500000-800000", label: "R$ 500.000 - R$ 800.000" },
-  { value: "800000-1200000", label: "R$ 800.000 - R$ 1.200.000" },
-  { value: "1200000+", label: "Acima de R$ 1.200.000" },
+  { value: "all", label: "Qualquer valor" },
+  { value: "0-300000", label: "Até 300k" },
+  { value: "300000-500000", label: "300k - 500k" },
+  { value: "500000-800000", label: "500k - 800k" },
+  { value: "800000-1200000", label: "800k - 1.2M" },
+  { value: "1200000+", label: "Acima de 1.2M" },
 ];
 
 const LOCATIONS = [
-  { value: "all", label: "Todas as regiões" },
+  { value: "all", label: "Todas regiões" },
   { value: "fortaleza", label: "Fortaleza" },
   { value: "eusebio", label: "Eusébio" },
   { value: "aquiraz", label: "Aquiraz" },
   { value: "caucaia", label: "Caucaia" },
-  { value: "maracanau", label: "Maracanaú" },
 ];
 
 export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) {
@@ -64,99 +63,95 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
   const hasActiveFilters = Object.values(filters).some(value => value !== "all" && value !== "");
 
   return (
-    <div className="bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="bg-warm-white/95 backdrop-blur-sm border-b border-soft-beige sticky top-20 z-40">
+      <div className="max-w-7xl mx-auto px-8">
         
-        {/* Barra de busca principal */}
-        <div className="py-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+        {/* Barra principal minimalista */}
+        <div className="py-8">
+          <div className="flex items-center gap-6">
             
-            {/* Campo de busca */}
+            {/* Campo de busca elegante */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 text-leather-light w-4 h-4" />
               <input
                 type="text"
-                placeholder="Buscar por título, localização ou características..."
+                placeholder="Buscar imóveis..."
                 value={filters.search}
                 onChange={(e) => handleFilterChange("search", e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                className="w-full pl-12 pr-6 py-4 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium transition-all duration-300 text-foreground placeholder-leather-light font-light"
               />
             </div>
 
-            {/* Filtros rápidos */}
-            <div className="flex gap-3">
-              <select
-                value={filters.type}
-                onChange={(e) => handleFilterChange("type", e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white min-w-[140px]"
-              >
-                {PROPERTY_TYPES.map(type => (
-                  <option key={type.value} value={type.value}>{type.label}</option>
-                ))}
-              </select>
+            {/* Filtros discretos */}
+            <select
+              value={filters.type}
+              onChange={(e) => handleFilterChange("type", e.target.value)}
+              className="px-6 py-4 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light min-w-[120px]"
+            >
+              {PROPERTY_TYPES.map(type => (
+                <option key={type.value} value={type.value}>{type.label}</option>
+              ))}
+            </select>
 
-              <select
-                value={filters.priceRange}
-                onChange={(e) => handleFilterChange("priceRange", e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white min-w-[160px]"
-              >
-                {PRICE_RANGES.map(range => (
-                  <option key={range.value} value={range.value}>{range.label}</option>
-                ))}
-              </select>
+            <select
+              value={filters.priceRange}
+              onChange={(e) => handleFilterChange("priceRange", e.target.value)}
+              className="px-6 py-4 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light min-w-[140px]"
+            >
+              {PRICE_RANGES.map(range => (
+                <option key={range.value} value={range.value}>{range.label}</option>
+              ))}
+            </select>
 
-              {/* Botão de filtros avançados */}
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={`flex items-center gap-2 px-4 py-3 border rounded-lg transition-all duration-200 ${
-                  isExpanded || hasActiveFilters
-                    ? "border-blue-500 bg-blue-50 text-blue-700"
-                    : "border-gray-300 hover:border-gray-400"
-                }`}
-              >
-                <SlidersHorizontal className="w-5 h-5" />
-                <span className="hidden sm:inline">Filtros</span>
-                {hasActiveFilters && (
-                  <span className="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    !
-                  </span>
-                )}
-              </button>
-            </div>
+            {/* Botão filtros avançados */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-3 px-6 py-4 border transition-all duration-300 ${
+                isExpanded || hasActiveFilters
+                  ? "border-leather-medium bg-leather-dark text-warm-white"
+                  : "border-soft-beige bg-white/80 text-foreground hover:border-leather-medium"
+              }`}
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span className="font-light text-sm tracking-wide">Filtros</span>
+              {hasActiveFilters && (
+                <span className="bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
+                  !
+                </span>
+              )}
+            </button>
           </div>
 
-          {/* Resultados e limpar filtros */}
-          <div className="flex items-center justify-between mt-4">
-            <p className="text-sm text-gray-600">
-              {totalProperties} {totalProperties === 1 ? 'imóvel encontrado' : 'imóveis encontrados'}
+          {/* Informações discretas */}
+          <div className="flex items-center justify-between mt-6">
+            <p className="text-sm text-leather-light font-light tracking-wide">
+              {totalProperties} {totalProperties === 1 ? 'imóvel' : 'imóveis'}
             </p>
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                className="flex items-center gap-2 text-sm text-leather-light hover:text-leather-dark transition-colors font-light"
               >
-                <X className="w-4 h-4" />
-                Limpar filtros
+                <X className="w-3 h-3" />
+                Limpar
               </button>
             )}
           </div>
         </div>
 
-        {/* Filtros avançados expandidos */}
+        {/* Filtros expandidos minimalistas */}
         {isExpanded && (
-          <div className="pb-6 border-t border-gray-100">
-            <div className="pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="pb-8 border-t border-soft-beige/50">
+            <div className="pt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
               
-              {/* Localização */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <MapPin className="w-4 h-4 inline mr-1" />
+                <label className="block text-xs text-leather-medium mb-3 font-light tracking-widest uppercase">
                   Localização
                 </label>
                 <select
                   value={filters.location}
                   onChange={(e) => handleFilterChange("location", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light"
                 >
                   {LOCATIONS.map(location => (
                     <option key={location.value} value={location.value}>{location.label}</option>
@@ -164,18 +159,16 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                 </select>
               </div>
 
-              {/* Quartos */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <Bed className="w-4 h-4 inline mr-1" />
+                <label className="block text-xs text-leather-medium mb-3 font-light tracking-widest uppercase">
                   Quartos
                 </label>
                 <select
                   value={filters.bedrooms}
                   onChange={(e) => handleFilterChange("bedrooms", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light"
                 >
-                  <option value="all">Qualquer quantidade</option>
+                  <option value="all">Qualquer</option>
                   <option value="1">1 quarto</option>
                   <option value="2">2 quartos</option>
                   <option value="3">3 quartos</option>
@@ -183,38 +176,34 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                 </select>
               </div>
 
-              {/* Vagas */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <Car className="w-4 h-4 inline mr-1" />
-                  Vagas de garagem
+                <label className="block text-xs text-leather-medium mb-3 font-light tracking-widest uppercase">
+                  Vagas
                 </label>
                 <select
                   value={filters.parking}
                   onChange={(e) => handleFilterChange("parking", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light"
                 >
-                  <option value="all">Qualquer quantidade</option>
+                  <option value="all">Qualquer</option>
                   <option value="1">1 vaga</option>
                   <option value="2">2 vagas</option>
                   <option value="3">3+ vagas</option>
                 </select>
               </div>
 
-              {/* Financiamento */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <DollarSign className="w-4 h-4 inline mr-1" />
+                <label className="block text-xs text-leather-medium mb-3 font-light tracking-widest uppercase">
                   Financiamento
                 </label>
                 <select
                   value={filters.financing}
                   onChange={(e) => handleFilterChange("financing", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white/80 border border-soft-beige rounded-none focus:outline-none focus:border-leather-medium text-foreground font-light"
                 >
                   <option value="all">Todos</option>
-                  <option value="yes">Aceita financiamento</option>
-                  <option value="no">Apenas à vista</option>
+                  <option value="yes">Aceita</option>
+                  <option value="no">À vista</option>
                 </select>
               </div>
             </div>

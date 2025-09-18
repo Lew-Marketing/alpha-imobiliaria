@@ -28,29 +28,37 @@ body {
 /* ----------------- CORES MODERN HOUSE INSPIRED ----------------- */
 :root {
   /* Cores principais */
-  --background: #f5f1ed;
-  --foreground: #1a1a1a;
+  --background: #faf9f7;
+  --foreground: #2c2925;
   --white: #ffffff; 
-  --muted: #f8f9fa;
-  --muted-foreground: #4b5563;
+  --muted: #f7f5f2;
+  --muted-foreground: #8b8680;
   
   /* Cores de acento */
-  --primary: #111827;
-  --primary-foreground: #ffffff;
-  --secondary: #f3f4f6;
-  --secondary-foreground: #374151;
-  --accent: #6366f1;
+  --primary: #3d3832;
+  --primary-foreground: #faf9f7;
+  --secondary: #f0ede8;
+  --secondary-foreground: #5a5550;
+  --accent: #8b7355;
   --accent-foreground: #ffffff;
   
+  /* Tons de couro e tecidos premium */
+  --leather-dark: #4a3f35;
+  --leather-medium: #6b5b4f;
+  --leather-light: #a69080;
+  --cream: #f8f6f1;
+  --warm-white: #fefcf8;
+  --soft-beige: #ebe7e0;
+  
   /* Cores de borda e divisão */
-  --border: #e5e7eb;
-  --ring: #d1d5db;
+  --border: #e8e4dd;
+  --ring: #d4cfc6;
   
   /* Estados */
-  --destructive: #ef4444;
+  --destructive: #c5534a;
   --destructive-foreground: #ffffff;
-  --success: #10b981;
-  --warning: #f59e0b;
+  --success: #7a8471;
+  --warning: #b8956a;
 }
 
 @theme inline {
@@ -70,6 +78,12 @@ body {
   --color-destructive-foreground: var(--destructive-foreground);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-leather-dark: var(--leather-dark);
+  --color-leather-medium: var(--leather-medium);
+  --color-leather-light: var(--leather-light);
+  --color-cream: var(--cream);
+  --color-warm-white: var(--warm-white);
+  --color-soft-beige: var(--soft-beige);
   
   --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: var(--font-geist-mono);
@@ -90,13 +104,14 @@ body {
 
 /* ----------------- BODY ----------------- */
 body {
-  background-color: var(--white);
+  background-color: var(--warm-white);
   color: var(--foreground);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.01em;
   transform: translateZ(0); /* Force GPU acceleration */
   backface-visibility: hidden;
+  line-height: 1.6;
 
 }
 
