@@ -75,22 +75,22 @@ export default function HeroCarousel() {
            
             <div className="lg:w-2/5 w-full h-1/2 lg:h-full flex flex-col justify-center bg-background px-8 lg:px-12 py-8">
               <div className="space-y-4 max-w-md">
-                <p className="text-luxury-gray label-luxury">
+                <p className="text-luxury-gray font-light text-sm uppercase tracking-widest">
                   Today at Alpha Imobiliária
                 </p>
 
-                <h2 className="text-2xl md:text-3xl lg:text-4xl title-luxury text-contrast-high leading-tight">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-light text-luxury-charcoal leading-tight tracking-wide">
                   Conte com a Alpha Imobiliária
                 </h2>
 
-                <p className="text-base lg:text-lg text-luxury-light text-luxury-gray leading-relaxed">
+                <p className="text-base lg:text-lg font-light text-luxury-gray leading-relaxed tracking-wide">
                   Compromisso em proporcionar a melhor moradia com o melhor preço para sua família.
                 </p>
 
                 <div className="pt-2">
                   <Link 
                     href="/dashboard/properties"
-                    className="inline-flex items-center gap-2 px-8 py-3 btn-luxury btn-text-luxury"
+                    className="inline-flex items-center gap-2 bg-warm-lamp text-luxury-charcoal px-8 py-3 rounded-lg font-medium text-sm tracking-wide hover:bg-warm-lamp/90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   >
                     Ver Imóveis
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -44,10 +44,10 @@ export default function PropertyCard({ property, isNew = false }) {
       >
         
         {/* Card com background elegante */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-sm shadow-lg group-hover:shadow-xl transition-all duration-500 ease-out overflow-hidden">
+        <div className="card-premium group-hover:shadow-xl transition-all duration-500 ease-out overflow-hidden">
           
           {/* Imagem */}
-          <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-premium">
             {!imageLoaded && (
               <div className="absolute inset-0 bg-luxury-cream animate-pulse" />
             )}
@@ -87,30 +87,30 @@ export default function PropertyCard({ property, isNew = false }) {
           )}
 
           {/* Conteúdo */}
-          <div className="p-6">
+          <div className="p-6 rounded-b-premium">
             <div className="flex justify-between items-start mb-2">
-              <h3 className="text-lg title-luxury text-luxury-charcoal font-medium group-hover:text-warm-lamp transition-colors duration-300">
+              <h3 className="text-lg font-serif font-light text-luxury-charcoal group-hover:text-warm-lamp transition-colors duration-300 tracking-wide">
                 {property.title || "Imóvel"}
               </h3>
             </div>
             
-            <p className="text-sm text-luxury-gray text-luxury-light mb-4">
+            <p className="text-sm text-luxury-gray font-light mb-4 tracking-wide">
               {property.location || "Localização"}
             </p>
 
             <div className="flex justify-between items-end">
               <div>
-                <p className="text-xl font-medium text-luxury-charcoal">
+                <p className="text-xl font-serif font-light text-luxury-charcoal tracking-wide">
                   {formatPrice(property.sale_price)}
                 </p>
-                <p className="text-xs text-luxury-gray text-luxury-light mt-1">
+                <p className="text-xs text-luxury-gray font-light mt-1 tracking-wide">
                   {property.financing_compatible ? "Financiamento disponível" : "À Vista"}
                 </p>
               </div>
               
               {/* Detalhes do imóvel */}
               <div className="text-right">
-                <div className="flex items-center gap-3 text-xs text-luxury-gray">
+                <div className="flex items-center gap-3 text-xs text-luxury-gray font-light">
                   {property.bedrooms && (
                     <span>{property.bedrooms} qtos</span>
                   )}
@@ -119,7 +119,7 @@ export default function PropertyCard({ property, isNew = false }) {
                   )}
                 </div>
                 {property.built_area_m2 && (
-                  <p className="text-xs text-luxury-gray mt-1">
+                  <p className="text-xs text-luxury-gray font-light mt-1">
                     {property.built_area_m2}m²
                   </p>
                 )}
