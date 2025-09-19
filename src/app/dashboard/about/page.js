@@ -147,71 +147,27 @@ export default function About() {
       </section>
 
       {/* Valores */}
-      <section className="py-24 relative overflow-hidden">
-        {/* Background luxuoso */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-stone-50 to-amber-50/30"></div>
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(184, 134, 11, 0.12) 0%, transparent 50%),
-              linear-gradient(45deg, rgba(212, 175, 55, 0.08) 25%, transparent 25%)
-            `,
-            backgroundSize: '120px 120px, 100px 100px, 80px 80px'
-          }}
-        ></div>
-        
+      <section className="py-24 bg-luxury-cream">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-            <div className="inline-block px-8 py-3 bg-gradient-to-r from-amber-100/80 to-yellow-50/80 border border-amber-200/60 rounded-full mb-8 shadow-sm backdrop-blur-sm">
-              <span className="text-amber-900 text-sm font-medium tracking-widest uppercase">
-                Nossos Pilares
-              </span>
-            </div>
-            <h2 className="text-5xl font-serif font-light text-slate-800 mb-8 leading-tight">
+            <h2 className="text-4xl title-luxury text-luxury-charcoal mb-6">
               Nossos Valores
             </h2>
-            <div className="w-24 h-0.5 bg-gradient-to-r from-amber-600 to-yellow-600 mx-auto mb-8 shadow-sm"></div>
-            <p className="text-xl text-slate-700 font-light max-w-3xl mx-auto leading-relaxed">
-              Os <strong className="text-slate-900 font-medium">princípios fundamentais</strong> que guiam cada decisão e ação em nossa empresa
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="group relative">
-                {/* Card principal */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-10 shadow-xl border border-stone-200/50 hover:shadow-2xl transition-all duration-500 group-hover:scale-105 relative z-10">
-                  {/* Ícone premium */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-yellow-50 rounded-2xl flex items-center justify-center mb-8 shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                    <div className="text-3xl">{value.icon}</div>
-                  </div>
-                  
-                  {/* Título */}
-                  <h3 className="text-2xl font-serif font-medium text-slate-800 mb-6 group-hover:text-amber-700 transition-colors duration-300">
+              <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="text-4xl mb-6">{value.icon}</div>
+                <h3 className="text-xl title-luxury text-luxury-charcoal mb-4">
                   {value.title}
                 </h3>
-                  
-                  {/* Descrição */}
-                  <p className="text-slate-600 leading-relaxed font-light text-lg">
+                <p className="text-luxury-gray text-luxury-light leading-relaxed">
                   {value.description}
                 </p>
-                  
-                  {/* Elemento decorativo */}
-                  <div className="absolute top-6 right-6 w-2 h-2 bg-amber-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                
-                {/* Sombra decorativa */}
-                <div className="absolute -bottom-2 -right-2 w-full h-full bg-gradient-to-br from-amber-200/20 to-yellow-200/20 rounded-2xl -z-10 group-hover:scale-105 transition-transform duration-500"></div>
               </div>
             ))}
-          </div>
-          
-          {/* Elemento decorativo inferior */}
-          <div className="flex justify-center mt-16">
-            <div className="w-32 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-60"></div>
           </div>
         </div>
       </section>
@@ -239,6 +195,10 @@ export default function About() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    priority={index === 0}
+                    onError={(e) => {
+                      e.target.src = `https://images.unsplash.com/photo-${1494790108755 + index}?w=400&q=80`;
+                    }}
                   />
                 </div>
                 <h3 className="text-xl title-luxury text-luxury-charcoal mb-2">
