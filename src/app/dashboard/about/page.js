@@ -13,22 +13,22 @@ const team = [
     name: "Maria Silva",
     role: "Diretora Comercial",
     experience: "15 anos de experiência",
-    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
-    fallback: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80"
+    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
+    fallback: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
   },
   {
     name: "João Santos",
     role: "Corretor Senior",
     experience: "12 anos de experiência",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-    fallback: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80"
+    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+    fallback: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80"
   },
   {
     name: "Ana Costa",
     role: "Especialista em Avaliações",
     experience: "10 anos de experiência",
-    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
-    fallback: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80"
+    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
+    fallback: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80"
   }
 ];
 
