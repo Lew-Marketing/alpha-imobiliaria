@@ -10,7 +10,7 @@ const stats = [
 
 export default function Sobre() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       
       {/* Hero sofisticado */}
       <section className="relative h-screen flex items-center">
@@ -38,7 +38,7 @@ export default function Sobre() {
       {/* Stats elegantes */}
       <section className="relative -mt-24 z-20">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="card-luxury rounded-lg p-12">
+          <div className="card-luxury rounded-premium p-12">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
@@ -63,13 +63,13 @@ export default function Sobre() {
             backgroundImage: `url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-luxury-gray/80 via-background/95 to-pearl-white" />
+        <div className="absolute inset-0 bg-gradient-to-l from-luxury-gray/80 via-luxury-cream/95 to-pearl-white" />
         
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <div>
-                <div className="w-px h-12 bg-accent mb-6 lamp-glow"></div>
+                <div className="w-px h-12 bg-warm-lamp mb-6 lamp-glow"></div>
                 <h2 className="text-4xl title-luxury text-contrast-high mb-6 leading-tight">
                   Nossa História
                 </h2>
@@ -89,10 +89,10 @@ export default function Sobre() {
             </div>
 
             <div className="relative">
-              <div className="card-luxury rounded-lg p-6">
-                <div className="aspect-[3/4] relative overflow-hidden rounded">
+              <div className="card-luxury rounded-premium p-6">
+                <div className="aspect-[3/4] relative overflow-hidden rounded-premium">
                   <Image
-                    src="/images/about-vertical.jpg"
+                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
                     alt="Alpha Conceito"
                     fill
                     className="object-cover"
@@ -128,8 +128,8 @@ export default function Sobre() {
               { title: "Confiança", desc: "Relacionamentos duradouros" },
               { title: "Inovação", desc: "Tecnologia a seu favor" }
             ].map((value, index) => (
-              <div key={index} className="bg-white/95 backdrop-blur-sm rounded-lg p-6 text-center shadow-xl">
-                <div className="w-px h-6 bg-accent mx-auto mb-4 lamp-glow"></div>
+              <div key={index} className="bg-white/95 backdrop-blur-sm rounded-premium p-6 text-center shadow-xl">
+                <div className="w-px h-6 bg-warm-lamp mx-auto mb-4 lamp-glow"></div>
                 <h3 className="text-lg title-luxury text-gray-900 mb-3 font-semibold">
                   {value.title}
                 </h3>
@@ -157,14 +157,14 @@ export default function Sobre() {
           <h2 className="text-4xl title-luxury text-white mb-6 drop-shadow-lg font-semibold">
             Vamos Conversar
           </h2>
-          <p className="text-lg text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-lg text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md text-luxury-light">
             Entre em contato e descubra como podemos ajudar você
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/dashboard/contact"
-              className="bg-white text-gray-900 px-8 py-3 btn-text-luxury hover:bg-gray-100 transition-all duration-300 shadow-lg font-medium"
+              className="btn-luxury px-8 py-3 btn-text-luxury hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               Contato
             </a>
@@ -172,7 +172,7 @@ export default function Sobre() {
               href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-white/80 text-white px-8 py-3 btn-text-luxury hover:bg-white/20 transition-all duration-300 backdrop-blur-sm font-medium"
+              className="border-2 border-white/80 text-white px-8 py-3 btn-text-luxury hover:bg-white/20 transition-all duration-300 backdrop-blur-sm rounded-premium"
             >
               WhatsApp
             </a>
