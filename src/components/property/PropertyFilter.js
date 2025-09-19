@@ -38,51 +38,43 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
   }, [filters, onFilterChange]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden bg-white border-b border-gray-200">
       {/* Background elegante */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=80')`,
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-luxury-charcoal/90 via-luxury-gray/85 to-luxury-charcoal/90" />
       
       {/* Conteúdo */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         
         {/* Header minimalista */}
-        <div className="text-center mb-12">
-          <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
-          <h1 className="text-4xl font-display font-light text-pearl-white mb-3 tracking-wide">
-            Encontre Seu Lar Ideal
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-display font-light text-luxury-charcoal mb-2 tracking-wide">
+            Filtrar Imóveis
           </h1>
-          <p className="text-luxury-light-gray font-light text-lg">
+          <p className="text-luxury-gray font-light text-base">
             {totalProperties} imóveis selecionados
           </p>
         </div>
 
         {/* Filtro linear horizontal */}
-        <div className="bg-white/95 backdrop-blur-lg border border-warm-lamp/20 rounded-xl p-8 shadow-2xl max-w-6xl mx-auto">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 max-w-6xl mx-auto">
           
           {/* Busca principal */}
-          <div className="relative mb-8">
+          <div className="relative mb-6">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gray w-5 h-5" />
             <input
               type="text"
               placeholder="Digite o que procura... (ex: casa, apartamento, Eusébio)"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
-              className="w-full pl-12 pr-6 py-4 bg-white/80 border border-luxury-gray/30 rounded-lg text-luxury-charcoal placeholder-luxury-gray focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300 font-light text-base"
+              className="w-full pl-12 pr-6 py-3 bg-white border border-gray-300 rounded-lg text-luxury-charcoal placeholder-luxury-gray focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300 font-light text-sm"
             />
           </div>
 
           {/* Filtros horizontais */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
             {/* Tipo de imóvel */}
             <div>
-              <label className="block text-luxury-charcoal font-medium text-sm uppercase tracking-widest mb-4">
+              <label className="block text-luxury-charcoal font-medium text-xs uppercase tracking-widest mb-3">
                 Tipo de Imóvel
               </label>
               <div className="flex flex-wrap gap-2">
@@ -90,10 +82,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                   <button
                     key={type.value}
                     onClick={() => handleFilterChange("type", type.value)}
-                    className={`px-4 py-2.5 rounded-lg font-light text-sm transition-all duration-300 ${
+                    className={`px-3 py-2 rounded-lg font-light text-xs transition-all duration-300 ${
                       filters.type === type.value
-                        ? "bg-warm-lamp text-luxury-charcoal shadow-lg transform scale-105"
-                        : "bg-luxury-cream text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal"
+                        ? "bg-warm-lamp text-luxury-charcoal shadow-md"
+                        : "bg-white text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal border border-gray-200"
                     }`}
                   >
                     {type.label}
@@ -104,7 +96,7 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
 
             {/* Faixa de preço */}
             <div>
-              <label className="block text-luxury-charcoal font-medium text-sm uppercase tracking-widest mb-4">
+              <label className="block text-luxury-charcoal font-medium text-xs uppercase tracking-widest mb-3">
                 Faixa de Preço
               </label>
               <div className="flex flex-wrap gap-2">
@@ -112,10 +104,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                   <button
                     key={range.value}
                     onClick={() => handleFilterChange("priceRange", range.value)}
-                    className={`px-4 py-2.5 rounded-lg font-light text-sm transition-all duration-300 ${
+                    className={`px-3 py-2 rounded-lg font-light text-xs transition-all duration-300 ${
                       filters.priceRange === range.value
-                        ? "bg-warm-lamp text-luxury-charcoal shadow-lg transform scale-105"
-                        : "bg-luxury-cream text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal"
+                        ? "bg-warm-lamp text-luxury-charcoal shadow-md"
+                        : "bg-white text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal border border-gray-200"
                     }`}
                   >
                     {range.label}
@@ -126,7 +118,7 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
 
             {/* Localização */}
             <div>
-              <label className="block text-luxury-charcoal font-medium text-sm uppercase tracking-widest mb-4">
+              <label className="block text-luxury-charcoal font-medium text-xs uppercase tracking-widest mb-3">
                 Localização
               </label>
               <div className="flex flex-wrap gap-2">
@@ -134,10 +126,10 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                   <button
                     key={location.value}
                     onClick={() => handleFilterChange("location", location.value)}
-                    className={`px-4 py-2.5 rounded-lg font-light text-sm transition-all duration-300 ${
+                    className={`px-3 py-2 rounded-lg font-light text-xs transition-all duration-300 ${
                       filters.location === location.value
-                        ? "bg-warm-lamp text-luxury-charcoal shadow-lg transform scale-105"
-                        : "bg-luxury-cream text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal"
+                        ? "bg-warm-lamp text-luxury-charcoal shadow-md"
+                        : "bg-white text-luxury-gray hover:bg-warm-lamp/20 hover:text-luxury-charcoal border border-gray-200"
                     }`}
                   >
                     {location.label}
@@ -145,11 +137,26 @@ export default function PropertyFilter({ onFilterChange, totalProperties = 0 }) 
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Detalhe decorativo */}
-          <div className="mt-8 flex justify-center">
-            <div className="w-24 h-px bg-gradient-to-r from-transparent via-warm-lamp to-transparent opacity-60"></div>
+            
+            {/* Botão limpar filtros */}
+            <div className="flex items-end">
+              <button
+                onClick={() => {
+                  const resetFilters = {
+                    search: "",
+                    type: "all",
+                    priceRange: "all",
+                    location: "all",
+                  };
+                  setFilters(resetFilters);
+                  onFilterChange(resetFilters);
+                }}
+                className="px-4 py-2 text-xs text-luxury-gray hover:text-warm-lamp border border-gray-200 rounded-lg hover:border-warm-lamp transition-all duration-300"
+              >
+                Limpar Filtros
+              </button>
+            </div>
           </div>
         </div>
       </div>

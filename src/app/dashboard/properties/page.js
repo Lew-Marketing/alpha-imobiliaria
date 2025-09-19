@@ -287,30 +287,18 @@ export default function Properties() {
       />
       
       {/* Seção principal com background elegante */}
-      <section className="relative">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1920&q=80')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-luxury-cream/95 via-luxury-cream/90 to-luxury-cream/95" />
-        
+      <section className="relative bg-white">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Header elegante */}
-          <div className="pt-20 pb-16 text-center">
-            <div className="w-px h-16 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-            <p className="label-luxury text-luxury-gray mb-4 tracking-widest">
-              NOSSO PORTFÓLIO
-            </p>
-            <h1 className="text-4xl lg:text-5xl title-display text-luxury-charcoal mb-6 font-light">
-              Todos os Imóveis
+          <div className="pt-8 pb-12 text-center">
+            <h1 className="text-3xl title-display text-luxury-charcoal mb-4 font-light">
+              Nossos Imóveis
             </h1>
             
             {/* Status do sistema com design elegante */}
             {error && !useSupabase && (
-              <div className="max-w-md mx-auto mt-6 p-4 bg-white/90 backdrop-blur-sm border border-warm-lamp/30 rounded-sm shadow-lg">
+              <div className="max-w-md mx-auto mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-luxury-gray text-luxury">
                   <span className="font-medium text-warm-lamp">Aviso:</span> Usando dados de demonstração. 
                   {error && ` (${error})`}
@@ -319,13 +307,13 @@ export default function Properties() {
             )}
             
             {!useSupabase && !error && (
-              <p className="text-sm text-luxury-gray/80 mt-4 text-luxury-light">
+              <p className="text-sm text-luxury-gray/80 mt-2 text-luxury-light">
                 Dados de demonstração - Configure Supabase para dados reais
               </p>
             )}
             
             {useSupabase && (
-              <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-sm shadow-sm">
+              <div className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-green-50 rounded-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <p className="text-sm text-luxury-gray text-luxury">
                   Conectado ao banco de dados
@@ -336,21 +324,20 @@ export default function Properties() {
 
           {/* Lista de propriedades */}
           {filteredProperties.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="w-px h-12 bg-luxury-gray mx-auto mb-6 opacity-50"></div>
+            <div className="text-center py-16">
               <p className="text-luxury-gray font-light text-lg text-luxury-light mb-6">
                 {properties.length === 0 ? "Nenhum imóvel encontrado." : "Nenhum imóvel corresponde aos filtros selecionados."}
               </p>
               <button 
                 onClick={fetchProperties}
-                className="btn-luxury px-8 py-3 btn-text-luxury"
+                className="bg-warm-lamp text-luxury-charcoal px-6 py-2 rounded-lg hover:bg-warm-lamp/90 transition-colors"
               >
                 Tentar novamente
               </button>
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 pb-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 pb-16">
                 {filteredProperties.map((property) => (
                   <PropertyCard 
                     key={property.property_id || property.id} 
@@ -360,8 +347,7 @@ export default function Properties() {
               </div>
               
               {/* Footer com informações elegante */}
-              <div className="pb-20 pt-8">
-                <div className="w-24 h-px bg-gradient-to-r from-transparent via-luxury-gray to-transparent mx-auto mb-8"></div>
+              <div className="pb-12 pt-6 border-t border-gray-200">
                 <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-luxury-gray">
                   <p className="text-luxury-light mb-2 sm:mb-0">
                     Exibindo <span className="font-medium text-luxury-charcoal">{filteredProperties.length}</span> de <span className="font-medium text-luxury-charcoal">{properties.length}</span> {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}
