@@ -69,12 +69,12 @@ export default function About() {
         
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="w-1 h-16 bg-warm-lamp mb-10"></div>
+            <div className="w-px h-16 bg-warm-lamp mb-10 lamp-glow"></div>
             <h1 className="text-6xl lg:text-7xl font-display font-light text-white mb-8 leading-tight">
               Alpha
               <span className="block text-warm-lamp">Imobiliária</span>
             </h1>
-            <p className="text-2xl text-white/90 leading-relaxed font-light">
+            <p className="text-2xl text-white/90 leading-relaxed font-light text-luxury-light">
               Excelência e confiança no mercado imobiliário desde 2014
             </p>
           </div>
@@ -109,11 +109,11 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
-              <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-8 leading-tight">
+              <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
+              <h2 className="text-4xl title-luxury text-luxury-charcoal mb-8 leading-tight">
                 Nossa História
               </h2>
-              <div className="space-y-6 text-lg text-luxury-gray leading-relaxed font-light">
+              <div className="space-y-6 text-lg text-luxury-gray leading-relaxed text-luxury-light">
                 <p>
                   A Alpha Imobiliária foi fundada em 2014 com uma visão clara: 
                   revolucionar o mercado imobiliário através da transparência, 
@@ -150,11 +150,11 @@ export default function About() {
       <section className="py-24 bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
-            <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-6">
+            <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+            <h2 className="text-4xl title-luxury text-luxury-charcoal mb-6">
               Nossos Valores
             </h2>
-            <p className="text-xl text-luxury-gray font-light max-w-3xl mx-auto">
+            <p className="text-xl text-luxury-gray text-luxury-light max-w-3xl mx-auto">
               Princípios que guiam cada decisão e ação em nossa empresa
             </p>
           </div>
@@ -163,10 +163,10 @@ export default function About() {
             {values.map((value, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="text-4xl mb-6">{value.icon}</div>
-                <h3 className="text-2xl font-display font-light text-luxury-charcoal mb-4">
+                <h3 className="text-2xl title-luxury text-luxury-charcoal mb-4">
                   {value.title}
                 </h3>
-                <p className="text-luxury-gray leading-relaxed font-light">
+                <p className="text-luxury-gray leading-relaxed text-luxury-light">
                   {value.description}
                 </p>
               </div>
@@ -179,11 +179,11 @@ export default function About() {
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
-            <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-6">
+            <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+            <h2 className="text-4xl title-luxury text-luxury-charcoal mb-6">
               Nossa Equipe
             </h2>
-            <p className="text-xl text-luxury-gray font-light max-w-3xl mx-auto">
+            <p className="text-xl text-luxury-gray text-luxury-light max-w-3xl mx-auto">
               Profissionais experientes e dedicados ao seu sucesso
             </p>
           </div>
@@ -200,11 +200,11 @@ export default function About() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-                <h3 className="text-xl font-display font-light text-luxury-charcoal mb-2">
+                <h3 className="text-xl title-luxury text-luxury-charcoal mb-2">
                   {member.name}
                 </h3>
                 <div className="text-warm-lamp font-medium mb-2">{member.role}</div>
-                <div className="text-luxury-gray font-light">{member.experience}</div>
+                <div className="text-luxury-gray text-luxury-light">{member.experience}</div>
               </div>
             ))}
           </div>
@@ -222,24 +222,24 @@ export default function About() {
         <div className="absolute inset-0 bg-luxury-charcoal/80" />
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center text-white">
-          <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
-          <h2 className="text-4xl font-display font-light mb-8">
+          <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+          <h2 className="text-4xl title-luxury mb-8 text-white">
             Pronto para Encontrar seu Lar Ideal?
           </h2>
-          <p className="text-xl font-light mb-10 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-luxury-light mb-10 leading-relaxed max-w-2xl mx-auto">
             Nossa equipe está pronta para ajudar você a realizar o sonho da casa própria
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/dashboard/contact"
-              className="inline-flex items-center gap-3 bg-warm-lamp text-luxury-charcoal px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-warm-lamp/90 transition-all duration-300"
+              className="btn-luxury px-8 py-4 btn-text-luxury"
             >
               Entre em Contato
             </a>
             <a
               href="/dashboard/properties"
-              className="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-white/10 transition-all duration-300"
+              className="border-2 border-white text-white px-8 py-4 btn-text-luxury hover:bg-white/10 transition-all duration-300"
             >
               Ver Imóveis
             </a>

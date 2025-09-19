@@ -110,12 +110,12 @@ export default function Contact() {
         
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="w-1 h-16 bg-warm-lamp mb-10"></div>
+            <div className="w-px h-16 bg-warm-lamp mb-10 lamp-glow"></div>
             <h1 className="text-5xl lg:text-6xl font-display font-light text-white mb-8 leading-tight">
               Entre em
               <span className="block text-warm-lamp">Contato</span>
-            </h1>
-            <p className="text-xl text-white/90 leading-relaxed font-light">
+            <p className="text-luxury-gray text-luxury-light">
+            <p className="text-xl text-white/90 leading-relaxed text-luxury-light">
               Estamos aqui para ajudar você a encontrar o imóvel dos seus sonhos
             </p>
           </div>
@@ -165,11 +165,11 @@ export default function Contact() {
               ) : (
                 <>
                   <div className="mb-10">
-                    <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
-                    <h2 className="text-3xl font-display font-light text-luxury-charcoal mb-4">
+                    <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
+                    <h2 className="text-3xl title-luxury text-luxury-charcoal mb-4">
                       Envie sua Mensagem
                     </h2>
-                    <p className="text-luxury-gray font-light">
+                    <p className="text-luxury-gray text-luxury-light">
                       Preencha o formulário e entraremos em contato rapidamente
                     </p>
                   </div>
@@ -259,7 +259,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-warm-lamp text-luxury-charcoal px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-warm-lamp/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full btn-luxury px-8 py-4 btn-text-luxury disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
                     </button>
@@ -273,8 +273,8 @@ export default function Contact() {
               
               {/* Informações de Contato */}
               <div className="bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25 rounded-lg p-10">
-                <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
-                <h2 className="text-3xl font-display font-light text-luxury-charcoal mb-8">
+                <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
+                <h2 className="text-3xl title-luxury text-luxury-charcoal mb-8">
                   Informações de Contato
                 </h2>
                 
@@ -295,14 +295,14 @@ export default function Contact() {
 
               {/* Mapa Placeholder */}
               <div className="bg-white rounded-lg shadow-xl p-8">
-                <div className="w-1 h-8 bg-warm-lamp mb-6"></div>
-                <h3 className="text-xl font-display font-light text-luxury-charcoal mb-6">
+                <div className="w-px h-8 bg-warm-lamp mb-6 lamp-glow"></div>
+                <h3 className="text-xl title-luxury text-luxury-charcoal mb-6">
                   Nossa Localização
                 </h3>
                 <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-4xl mb-4">🗺️</div>
-                    <p className="text-luxury-gray font-light">
+                    <p className="text-luxury-gray text-luxury-light">
                       Mapa interativo será integrado em breve
                     </p>
                     <p className="text-sm text-luxury-gray/70 mt-2">
@@ -314,8 +314,8 @@ export default function Contact() {
 
               {/* Redes Sociais */}
               <div className="bg-luxury-charcoal text-white rounded-lg p-8">
-                <div className="w-1 h-8 bg-warm-lamp mb-6"></div>
-                <h3 className="text-xl font-display font-light mb-6">
+                <div className="w-px h-8 bg-warm-lamp mb-6 lamp-glow"></div>
+                <h3 className="text-xl title-luxury mb-6 text-white">
                   Siga-nos nas Redes Sociais
                 </h3>
                 <div className="flex gap-4">
@@ -339,8 +339,8 @@ export default function Contact() {
       <section className="py-16 bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
-            <h2 className="text-3xl font-display font-light text-luxury-charcoal mb-6">
+            <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+            <h2 className="text-3xl title-luxury text-luxury-charcoal mb-6">
               Perguntas Frequentes
             </h2>
           </div>
@@ -350,7 +350,7 @@ export default function Contact() {
               <h3 className="font-medium text-luxury-charcoal mb-3">
                 Qual o horário de atendimento?
               </h3>
-              <p className="text-luxury-gray font-light">
+              <p className="text-luxury-gray text-luxury-light">
                 Atendemos de segunda a sexta das 8h às 18h, e aos sábados das 8h às 12h. 
                 Para emergências, entre em contato via WhatsApp.
               </p>
@@ -360,7 +360,7 @@ export default function Contact() {
               <h3 className="font-medium text-luxury-charcoal mb-3">
                 A avaliação do imóvel é realmente gratuita?
               </h3>
-              <p className="text-luxury-gray font-light">
+              <p className="text-luxury-gray text-luxury-light">
                 Sim! Oferecemos avaliação gratuita e sem compromisso para todos os imóveis. 
                 Nossa equipe especializada fará uma análise completa do mercado.
               </p>

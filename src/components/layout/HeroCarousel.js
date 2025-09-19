@@ -59,7 +59,7 @@ export default function HeroCarousel() {
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="max-w-2xl">
-            <div className="w-1 h-16 bg-warm-lamp mb-8"></div>
+            <div className="w-px h-16 bg-warm-lamp mb-8 lamp-glow"></div>
             <h1 className="text-5xl lg:text-6xl font-display font-light text-white mb-6 leading-tight">
               {heroSlides[current].title}
             </h1>
@@ -68,7 +68,7 @@ export default function HeroCarousel() {
             </p>
             <Link
               href="/dashboard/properties"
-              className="inline-flex items-center gap-3 bg-warm-lamp text-luxury-charcoal px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-warm-lamp/90 transition-all duration-300 transform hover:scale-105"
+              className="btn-luxury px-8 py-4 btn-text-luxury inline-flex items-center gap-2"
             >
               {heroSlides[current].cta}
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

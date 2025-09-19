@@ -24,7 +24,7 @@ export default function AboutSectionPreview() {
 
           {/* Conteúdo */}
           <div>
-            <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
+            <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
             <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-8 leading-tight">
               Compromisso com a
               <span className="block text-warm-lamp">Excelência</span>
@@ -56,7 +56,7 @@ export default function AboutSectionPreview() {
 
             <Link
               href="/dashboard/about"
-              className="inline-flex items-center gap-3 text-luxury-charcoal hover:text-warm-lamp font-medium tracking-wide transition-colors duration-300 border-b border-luxury-charcoal hover:border-warm-lamp pb-1"
+              className="inline-flex items-center gap-3 text-luxury-charcoal hover:text-warm-lamp font-medium tracking-wide transition-colors duration-300 border-b border-luxury-charcoal hover:border-warm-lamp pb-1 text-luxury"
             >
               Conheça Nossa História Completa
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

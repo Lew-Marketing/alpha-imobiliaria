@@ -13,7 +13,7 @@ export default function AboutHighlight() {
           
           {/* Conteúdo */}
           <div className="text-white">
-            <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
+            <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
             <h2 className="text-4xl lg:text-5xl font-display font-light mb-8 leading-tight">
               Mais de 10 Anos de
               <span className="block text-warm-lamp">Excelência</span>
@@ -25,13 +25,13 @@ export default function AboutHighlight() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/dashboard/about"
-                className="inline-flex items-center gap-3 bg-warm-lamp text-luxury-charcoal px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-warm-lamp/90 transition-all duration-300"
+                className="btn-luxury px-8 py-4 btn-text-luxury"
               >
                 Nossa História
               </Link>
               <Link
                 href="/dashboard/contact"
-                className="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-white/10 transition-all duration-300"
+                className="border-2 border-white text-white px-8 py-4 btn-text-luxury hover:bg-white/10 transition-all duration-300"
               >
                 Fale Conosco
               </Link>
