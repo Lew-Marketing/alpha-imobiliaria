@@ -45,6 +45,19 @@ export default function AboutSectionPreview() {
 
       {/* Faixa com fundo + texto */}
       <div className="bg-white py-20 px-6">
+        {/* Linha separadora luxuosa */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center w-full max-w-lg">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-luxury-gray/20 to-luxury-gray/40"></div>
+              <div className="mx-8">
+                <div className="w-1 h-1 bg-luxury-gray/60 rounded-full"></div>
+              </div>
+              <div className="flex-1 h-px bg-gradient-to-r from-luxury-gray/40 via-luxury-gray/20 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center max-w-4xl mx-auto">
           
           {/* Linha minimalista */}
