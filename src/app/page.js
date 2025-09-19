@@ -1,23 +1,16 @@
 "use client";
 import HeroCarousel from "../components/layout/HeroCarousel";
-import LeadSection from "../components/layout/LeadSection";
 import FeaturedSales from "../components/layout/FeaturedSales";
-import AboutSectionPreview from "../components/layout/AboutSectionPreview";
 import AboutHighlight from "../components/layout/AboutHighlight";
+import AboutSectionPreview from "../components/layout/AboutSectionPreview";
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       <HeroCarousel />
-      <LeadSection />
       <FeaturedSales />
-       <AboutHighlight />
-      <section className="-mt-12">
-        <AboutSectionPreview />
-      </section>
-      
-
-
+      <AboutHighlight />
+      <AboutSectionPreview />
     </div>
   );
 }

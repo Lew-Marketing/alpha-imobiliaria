@@ -2,51 +2,100 @@
 import Image from "next/image";
 
 const stats = [
-  { number: "2014", label: "Fundada" },
-  { number: "500+", label: "Imóveis" },
-  { number: "1000+", label: "Clientes" },
-  { number: "10+", label: "Anos" },
+  { number: "2014", label: "Fundada", description: "Início da nossa jornada" },
+  { number: "500+", label: "Imóveis Vendidos", description: "Negócios realizados" },
+  { number: "1000+", label: "Clientes Satisfeitos", description: "Relacionamentos construídos" },
+  { number: "98%", label: "Aprovação", description: "Índice de satisfação" },
 ];
 
-export default function Sobre() {
+const values = [
+  {
+    title: "Transparência",
+    description: "Clareza total em cada etapa do processo, sem surpresas ou custos ocultos.",
+    icon: "🔍"
+  },
+  {
+    title: "Excelência",
+    description: "Padrão superior de qualidade em todos os nossos serviços e atendimento.",
+    icon: "⭐"
+  },
+  {
+    title: "Confiança",
+    description: "Relacionamentos duradouros baseados em credibilidade e resultados.",
+    icon: "🤝"
+  },
+  {
+    title: "Inovação",
+    description: "Tecnologia e métodos modernos para otimizar sua experiência.",
+    icon: "🚀"
+  }
+];
+
+const team = [
+  {
+    name: "Maria Silva",
+    role: "Diretora Comercial",
+    experience: "15 anos de experiência",
+    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80"
+  },
+  {
+    name: "João Santos",
+    role: "Corretor Senior",
+    experience: "12 anos de experiência",
+    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+  },
+  {
+    name: "Ana Costa",
+    role: "Especialista em Avaliações",
+    experience: "10 anos de experiência",
+    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80"
+  }
+];
+
+export default function About() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* Hero sofisticado */}
+      {/* Hero */}
       <section className="relative h-screen flex items-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1920&q=80')`,
-          }}
+        <Image
+          src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1920&q=80"
+          alt="Alpha Imobiliária"
+          fill
+          className="object-cover"
+          priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-luxury-charcoal/90 via-luxury-gray/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-luxury-charcoal/90 via-luxury-charcoal/70 to-transparent" />
         
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <div className="w-px h-20 bg-warm-lamp mb-10 lamp-glow"></div>
-            <h1 className="text-6xl title-display text-contrast-light mb-8 leading-tight alpha-brand">
-              <span className="alpha-a">A</span>lpha<br />Conceito
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="w-1 h-16 bg-warm-lamp mb-10"></div>
+            <h1 className="text-6xl lg:text-7xl font-display font-light text-white mb-8 leading-tight">
+              Alpha
+              <span className="block text-warm-lamp">Imobiliária</span>
             </h1>
-            <p className="text-xl text-luxury-light leading-relaxed opacity-90 text-pearl-white">
-              Confiança e excelência no mercado imobiliário desde 2014
+            <p className="text-2xl text-white/90 leading-relaxed font-light">
+              Excelência e confiança no mercado imobiliário desde 2014
             </p>
           </div>
         </div>
       </section>
 
-      {/* Stats elegantes */}
-      <section className="relative -mt-24 z-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="card-luxury rounded-premium p-12">
+      {/* Estatísticas */}
+      <section className="relative -mt-32 z-20">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="bg-white rounded-lg shadow-2xl p-12">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-4xl title-luxury text-contrast-high mb-3 lamp-accent">
+                  <div className="text-5xl font-display font-light text-warm-lamp mb-3">
                     {stat.number}
                   </div>
-                  <div className="text-luxury-gray label-luxury">
+                  <div className="text-lg font-medium text-luxury-charcoal mb-2">
                     {stat.label}
+                  </div>
+                  <div className="text-sm text-luxury-gray font-light">
+                    {stat.description}
                   </div>
                 </div>
               ))}
@@ -55,50 +104,42 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* História */}
-      <section className="relative py-24 mt-20">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-luxury-gray/80 via-luxury-cream/95 to-pearl-white" />
-        
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+      {/* Nossa História */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <div>
-                <div className="w-px h-12 bg-warm-lamp mb-6 lamp-glow"></div>
-                <h2 className="text-4xl title-luxury text-contrast-high mb-6 leading-tight">
-                  Nossa História
-                </h2>
-              </div>
-              
-              <div className="space-y-4 text-base text-luxury-gray leading-relaxed text-luxury-light">
+            <div>
+              <div className="w-1 h-12 bg-warm-lamp mb-8"></div>
+              <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-8 leading-tight">
+                Nossa História
+              </h2>
+              <div className="space-y-6 text-lg text-luxury-gray leading-relaxed font-light">
                 <p>
-                  A Alpha Conceito iniciou suas atividades em 2014 com uma visão clara: 
-                  construir uma história sólida e confiável no mercado imobiliário.
+                  A Alpha Imobiliária foi fundada em 2014 com uma visão clara: 
+                  revolucionar o mercado imobiliário através da transparência, 
+                  ética e excelência no atendimento.
                 </p>
-                
                 <p>
-                  Nossa missão tem sido oferecer um atendimento diferenciado, baseado 
-                  em ética, transparência e excelência.
+                  Ao longo dos anos, construímos uma reputação sólida baseada 
+                  em resultados excepcionais e relacionamentos duradouros com 
+                  nossos clientes.
+                </p>
+                <p>
+                  Hoje, somos reconhecidos como uma das principais imobiliárias 
+                  de Fortaleza, com uma equipe especializada e comprometida em 
+                  superar expectativas.
                 </p>
               </div>
             </div>
-
             <div className="relative">
-              <div className="card-luxury rounded-premium p-6">
-                <div className="aspect-[3/4] relative overflow-hidden rounded-premium">
-                  <Image
-                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
-                    alt="Alpha Conceito"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
+              <div className="aspect-[4/5] relative overflow-hidden rounded-lg shadow-xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
+                  alt="História Alpha Imobiliária"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
@@ -106,35 +147,27 @@ export default function Sobre() {
       </section>
 
       {/* Valores */}
-      <section className="relative py-24">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85" />
-        
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <div className="w-px h-12 bg-warm-lamp mx-auto mb-6 lamp-glow"></div>
-          <h2 className="text-4xl title-luxury text-white mb-12 drop-shadow-lg">
-            Nossos Valores
-          </h2>
+      <section className="py-24 bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
+            <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-6">
+              Nossos Valores
+            </h2>
+            <p className="text-xl text-luxury-gray font-light max-w-3xl mx-auto">
+              Princípios que guiam cada decisão e ação em nossa empresa
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Ética", desc: "Transparência em cada negociação" },
-              { title: "Excelência", desc: "Qualidade em todos os serviços" },
-              { title: "Confiança", desc: "Relacionamentos duradouros" },
-              { title: "Inovação", desc: "Tecnologia a seu favor" }
-            ].map((value, index) => (
-              <div key={index} className="bg-white/95 backdrop-blur-sm rounded-premium p-6 text-center shadow-xl">
-                <div className="w-px h-6 bg-warm-lamp mx-auto mb-4 lamp-glow"></div>
-                <h3 className="text-lg title-luxury text-gray-900 mb-3 font-semibold">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {values.map((value, index) => (
+              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="text-4xl mb-6">{value.icon}</div>
+                <h3 className="text-2xl font-display font-light text-luxury-charcoal mb-4">
                   {value.title}
                 </h3>
-                <p className="text-gray-700 text-luxury-light leading-relaxed text-sm">
-                  {value.desc}
+                <p className="text-luxury-gray leading-relaxed font-light">
+                  {value.description}
                 </p>
               </div>
             ))}
@@ -142,39 +175,73 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* CTA final */}
+      {/* Equipe */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
+            <h2 className="text-4xl font-display font-light text-luxury-charcoal mb-6">
+              Nossa Equipe
+            </h2>
+            <p className="text-xl text-luxury-gray font-light max-w-3xl mx-auto">
+              Profissionais experientes e dedicados ao seu sucesso
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {team.map((member, index) => (
+              <div key={index} className="text-center group">
+                <div className="relative aspect-square mb-6 overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <h3 className="text-xl font-display font-light text-luxury-charcoal mb-2">
+                  {member.name}
+                </h3>
+                <div className="text-warm-lamp font-medium mb-2">{member.role}</div>
+                <div className="text-luxury-gray font-light">{member.experience}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="relative py-24">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80')`,
-          }}
+        <Image
+          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80"
+          alt="Contato Alpha Imobiliária"
+          fill
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 to-black/75" />
+        <div className="absolute inset-0 bg-luxury-charcoal/80" />
         
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
-          <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          <h2 className="text-4xl title-luxury text-white mb-6 drop-shadow-lg font-semibold">
-            Vamos Conversar
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center text-white">
+          <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
+          <h2 className="text-4xl font-display font-light mb-8">
+            Pronto para Encontrar seu Lar Ideal?
           </h2>
-          <p className="text-lg text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md text-luxury-light">
-            Entre em contato e descubra como podemos ajudar você
+          <p className="text-xl font-light mb-10 leading-relaxed max-w-2xl mx-auto">
+            Nossa equipe está pronta para ajudar você a realizar o sonho da casa própria
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/dashboard/contact"
-              className="btn-luxury px-8 py-3 btn-text-luxury hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center gap-3 bg-warm-lamp text-luxury-charcoal px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-warm-lamp/90 transition-all duration-300"
             >
-              Contato
+              Entre em Contato
             </a>
             <a
-              href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-2 border-white/80 text-white px-8 py-3 btn-text-luxury hover:bg-white/20 transition-all duration-300 backdrop-blur-sm rounded-premium"
+              href="/dashboard/properties"
+              className="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 font-medium tracking-wide uppercase text-sm hover:bg-white/10 transition-all duration-300"
             >
-              WhatsApp
+              Ver Imóveis
             </a>
           </div>
         </div>
