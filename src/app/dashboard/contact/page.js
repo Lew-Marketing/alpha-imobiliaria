@@ -97,8 +97,8 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* Hero */}
-      <section className="relative h-[70vh] flex items-center">
+      {/* Hero elegante */}
+      <section className="relative h-screen flex items-center">
         <Image
           src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&q=80"
           alt="Contato Alpha Imobiliária"
@@ -111,11 +111,11 @@ export default function Contact() {
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="w-px h-16 bg-warm-lamp mb-10 lamp-glow"></div>
-            <h1 className="text-5xl lg:text-6xl font-display font-light text-white mb-8 leading-tight">
+            <h1 className="text-6xl lg:text-7xl font-serif font-light text-white mb-8 leading-tight">
               Entre em
-              <span className="block text-warm-lamp">Contato</span>
+              <span className="block text-warm-lamp font-normal">Contato</span>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed text-luxury-light">
+            <p className="text-xl text-white/90 leading-relaxed font-light">
               Estamos aqui para ajudar você a encontrar o imóvel dos seus sonhos
             </p>
           </div>
@@ -123,9 +123,9 @@ export default function Contact() {
       </section>
 
       {/* Contatos Rápidos */}
-      <section className="relative -mt-20 z-20">
+      <section className="relative -mt-32 z-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             {quickContacts.map((contact, index) => (
               <a
                 key={index}
@@ -135,8 +135,8 @@ export default function Contact() {
                 className={`${contact.color} text-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 text-center`}
               >
                 <div className="text-4xl mb-4">{contact.icon}</div>
-                <h3 className="text-xl font-display font-light mb-2">{contact.title}</h3>
-                <p className="text-white/80 text-sm mb-4">{contact.subtitle}</p>
+                <h3 className="text-xl font-serif font-light mb-2">{contact.title}</h3>
+                <p className="text-white/80 text-sm mb-4 font-light">{contact.subtitle}</p>
                 <div className="font-medium">{contact.label}</div>
               </a>
             ))}
@@ -145,20 +145,20 @@ export default function Contact() {
       </section>
 
       {/* Formulário e Informações */}
-      <section className="py-16">
+      <section className="py-24 bg-gradient-to-br from-stone-50 via-amber-50/30 to-yellow-50/20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
             {/* Formulário */}
-            <div className="bg-white rounded-lg shadow-xl p-10">
+            <div className="bg-white/80 rounded-lg shadow-xl p-10">
               {submitted ? (
                 <div className="text-center py-12">
-                  <div className="w-1 h-12 bg-warm-lamp mx-auto mb-8"></div>
+                  <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
                   <div className="text-6xl mb-6">✅</div>
-                  <h3 className="text-2xl font-display font-light text-luxury-charcoal mb-4">
+                  <h3 className="text-2xl font-serif font-light text-slate-800 mb-4">
                     Mensagem Enviada!
                   </h3>
-                  <p className="text-luxury-gray font-light">
+                  <p className="text-slate-600 font-light">
                     Retornaremos seu contato em breve.
                   </p>
                 </div>
@@ -166,10 +166,10 @@ export default function Contact() {
                 <>
                   <div className="mb-10">
                     <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
-                    <h2 className="text-3xl title-luxury text-luxury-charcoal mb-4">
+                    <h2 className="text-3xl font-serif font-light text-slate-800 mb-4">
                       Envie sua Mensagem
                     </h2>
-                    <p className="text-luxury-gray text-luxury-light">
+                    <p className="text-slate-600 font-light">
                       Preencha o formulário e entraremos em contato rapidamente
                     </p>
                   </div>
@@ -177,7 +177,7 @@ export default function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-luxury-charcoal mb-2">
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
                           Nome Completo *
                         </label>
                         <input
@@ -186,12 +186,12 @@ export default function Contact() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition-all duration-300 font-light"
                           placeholder="Seu nome completo"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-luxury-charcoal mb-2">
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
                           Email *
                         </label>
                         <input
@@ -200,7 +200,7 @@ export default function Contact() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition-all duration-300 font-light"
                           placeholder="seu@email.com"
                         />
                       </div>
@@ -208,7 +208,7 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-luxury-charcoal mb-2">
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
                           Telefone
                         </label>
                         <input
@@ -216,12 +216,12 @@ export default function Contact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition-all duration-300 font-light"
                           placeholder="(85) 99999-9999"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-luxury-charcoal mb-2">
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
                           Assunto *
                         </label>
                         <select
@@ -229,7 +229,7 @@ export default function Contact() {
                           value={formData.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition-all duration-300 font-light"
                         >
                           <option value="">Selecione um assunto</option>
                           <option value="compra">Comprar Imóvel</option>
@@ -242,7 +242,7 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-luxury-charcoal mb-2">
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
                         Mensagem *
                       </label>
                       <textarea
@@ -251,7 +251,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-warm-lamp focus:ring-2 focus:ring-warm-lamp/20 transition-all duration-300 resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition-all duration-300 resize-none font-light"
                         placeholder="Descreva como podemos ajudar você..."
                       />
                     </div>
@@ -259,7 +259,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full btn-luxury px-8 py-4 btn-text-luxury disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-amber-700 text-white px-8 py-4 rounded-lg font-serif font-light text-lg tracking-wide hover:bg-amber-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
                     </button>
@@ -272,9 +272,9 @@ export default function Contact() {
             <div className="space-y-8">
               
               {/* Informações de Contato */}
-              <div className="bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25 rounded-lg p-10">
+              <div className="bg-white/80 rounded-lg p-10">
                 <div className="w-px h-12 bg-warm-lamp mb-8 lamp-glow"></div>
-                <h2 className="text-3xl title-luxury text-luxury-charcoal mb-8">
+                <h2 className="text-3xl font-serif font-light text-slate-800 mb-8">
                   Informações de Contato
                 </h2>
                 
@@ -283,8 +283,8 @@ export default function Contact() {
                     <div key={index} className="flex items-start gap-4">
                       <div className="text-2xl">{info.icon}</div>
                       <div>
-                        <h3 className="font-medium text-luxury-charcoal mb-2">{info.title}</h3>
-                        <div className="text-luxury-gray font-light whitespace-pre-line">
+                        <h3 className="font-medium text-slate-800 mb-2">{info.title}</h3>
+                        <div className="text-slate-600 font-light whitespace-pre-line">
                           {info.content}
                         </div>
                       </div>
@@ -294,18 +294,18 @@ export default function Contact() {
               </div>
 
               {/* Mapa Placeholder */}
-              <div className="bg-white rounded-lg shadow-xl p-8">
+              <div className="bg-white/80 rounded-lg shadow-xl p-8">
                 <div className="w-px h-8 bg-warm-lamp mb-6 lamp-glow"></div>
-                <h3 className="text-xl title-luxury text-luxury-charcoal mb-6">
+                <h3 className="text-xl font-serif font-light text-slate-800 mb-6">
                   Nossa Localização
                 </h3>
                 <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-4xl mb-4">🗺️</div>
-                    <p className="text-luxury-gray text-luxury-light">
+                    <p className="text-slate-600 font-light">
                       Mapa interativo será integrado em breve
                     </p>
-                    <p className="text-sm text-luxury-gray/70 mt-2">
+                    <p className="text-sm text-slate-500 mt-2 font-light">
                       Av. Pacífico, 731, Sala 305 - Eusébio, CE
                     </p>
                   </div>
@@ -313,9 +313,9 @@ export default function Contact() {
               </div>
 
               {/* Redes Sociais */}
-              <div className="bg-luxury-charcoal text-white rounded-lg p-8">
+              <div className="bg-slate-800 text-white rounded-lg p-8">
                 <div className="w-px h-8 bg-warm-lamp mb-6 lamp-glow"></div>
-                <h3 className="text-xl title-luxury mb-6 text-white">
+                <h3 className="text-xl font-serif font-light mb-6 text-white">
                   Siga-nos nas Redes Sociais
                 </h3>
                 <div className="flex gap-4">
@@ -336,45 +336,83 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-gradient-to-br from-amber-50/30 via-yellow-50/20 to-orange-50/25">
+      <section className="py-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-            <h2 className="text-3xl title-luxury text-luxury-charcoal mb-6">
+            <h2 className="text-4xl font-serif font-light text-slate-800 mb-6">
               Perguntas Frequentes
             </h2>
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white/80 rounded-lg p-6">
-              <h3 className="font-medium text-luxury-charcoal mb-3">
+            <div className="bg-white/80 rounded-lg p-8 shadow-sm">
+              <h3 className="font-medium text-slate-800 mb-3 font-serif">
                 Qual o horário de atendimento?
               </h3>
-              <p className="text-luxury-gray text-luxury-light">
+              <p className="text-slate-600 font-light">
                 Atendemos de segunda a sexta das 8h às 18h, e aos sábados das 8h às 12h. 
                 Para emergências, entre em contato via WhatsApp.
               </p>
             </div>
             
-            <div className="bg-white/80 rounded-lg p-6">
-              <h3 className="font-medium text-luxury-charcoal mb-3">
+            <div className="bg-white/80 rounded-lg p-8 shadow-sm">
+              <h3 className="font-medium text-slate-800 mb-3 font-serif">
                 A avaliação do imóvel é realmente gratuita?
               </h3>
-              <p className="text-luxury-gray text-luxury-light">
+              <p className="text-slate-600 font-light">
                 Sim! Oferecemos avaliação gratuita e sem compromisso para todos os imóveis. 
                 Nossa equipe especializada fará uma análise completa do mercado.
               </p>
             </div>
             
-            <div className="bg-white/80 rounded-lg p-6">
-              <h3 className="font-medium text-luxury-charcoal mb-3">
+            <div className="bg-white/80 rounded-lg p-8 shadow-sm">
+              <h3 className="font-medium text-slate-800 mb-3 font-serif">
                 Vocês trabalham com financiamento?
               </h3>
-              <p className="text-luxury-gray font-light">
+              <p className="text-slate-600 font-light">
                 Sim, temos parcerias com os principais bancos e facilitamos todo o processo 
                 de financiamento imobiliário para nossos clientes.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="relative py-24">
+        <Image
+          src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&q=80"
+          alt="Contato Final"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-slate-800/80" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center text-white">
+          <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
+          <h2 className="text-4xl font-serif font-light mb-8 text-white">
+            Pronto para Encontrar seu Lar Ideal?
+          </h2>
+          <p className="text-xl font-light mb-10 leading-relaxed max-w-2xl mx-auto">
+            Nossa equipe está pronta para ajudar você a realizar o sonho da casa própria
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+            <a
+              href="/dashboard/properties"
+              className="text-white hover:text-amber-700 font-serif text-lg tracking-wide transition-colors duration-300 border-b border-white/30 hover:border-amber-700 pb-1"
+            >
+              Ver Imóveis
+            </a>
+            <a
+              href="https://api.whatsapp.com/send?phone=5585996353513&text=Olá! Gostaria de mais informações."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-amber-700 font-serif text-lg tracking-wide transition-colors duration-300 border-b border-white/30 hover:border-amber-700 pb-1"
+            >
+              WhatsApp
+            </a>
           </div>
         </div>
       </section>
