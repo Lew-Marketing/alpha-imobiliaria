@@ -17,11 +17,14 @@ export default function PropertyCard({ property, isNew = false }) {
     
     // URLs de fallback baseadas no property_id
     const fallbackImages = [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80"
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=800&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1600566753229-f8d4c57c7b8b?w=800&q=80&fit=crop&auto=format"
     ];
     
     const imageIndex = (parseInt(property.property_id) + index) % fallbackImages.length;
@@ -59,7 +62,20 @@ export default function PropertyCard({ property, isNew = false }) {
               className={`object-cover transition-all duration-700 ease-out absolute will-change-transform group-hover:scale-105 ${
                 isHovered ? "opacity-0" : "opacity-100"
               } ${imageLoaded ? "opacity-100" : "opacity-0"}`}
-              onError={() => setImageError(true)}
+              onError={(e) => {
+                console.log(`Erro ao carregar imagem principal: ${e.target.src}`);
+                if (!imageError) {
+                  setImageError(true);
+                  // Tentar próxima imagem da lista de fallbacks
+                  const fallbackImages = [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&fit=crop&auto=format",
+                    "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&fit=crop&auto=format",
+                    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fit=crop&auto=format"
+                  ];
+                  const randomIndex = Math.floor(Math.random() * fallbackImages.length);
+                  e.target.src = fallbackImages[randomIndex];
+                }
+              }}
               onLoad={() => setImageLoaded(true)}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
@@ -72,6 +88,16 @@ export default function PropertyCard({ property, isNew = false }) {
               className={`object-cover transition-all duration-700 ease-out absolute hidden md:block will-change-transform group-hover:scale-105 ${
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
+              onError={(e) => {
+                console.log(`Erro ao carregar imagem hover: ${e.target.src}`);
+                // Fallback para imagem hover
+                const hoverFallbacks = [
+                  "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80&fit=crop&auto=format",
+                  "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80&fit=crop&auto=format"
+                ];
+                const randomIndex = Math.floor(Math.random() * hoverFallbacks.length);
+                e.target.src = hoverFallbacks[randomIndex];
+              }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
             />

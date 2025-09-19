@@ -24,8 +24,8 @@ const mockProperties = [
     built_area_m2: 180,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800"
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80&fit=crop"
     ]
   },
   {
@@ -40,8 +40,8 @@ const mockProperties = [
     built_area_m2: 120,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800"
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80&fit=crop"
     ]
   },
   {
@@ -56,8 +56,8 @@ const mockProperties = [
     built_area_m2: 250,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800",
-      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800"
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800&q=80&fit=crop"
     ]
   },
   {
@@ -72,8 +72,8 @@ const mockProperties = [
     built_area_m2: 200,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800",
-      "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=800"
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=800&q=80&fit=crop"
     ]
   },
   {
@@ -88,8 +88,8 @@ const mockProperties = [
     built_area_m2: 150,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600566753229-f8d4c57c7b8b?w=800",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800"
+      "https://images.unsplash.com/photo-1600566753229-f8d4c57c7b8b?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop"
     ]
   },
   {
@@ -104,8 +104,8 @@ const mockProperties = [
     built_area_m2: 80,
     has_photos: true,
     photos_highlight: [
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800"
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&q=80&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80&fit=crop"
     ]
   }
 ];
