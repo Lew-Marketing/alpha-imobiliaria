@@ -27,8 +27,8 @@ const team = [
     name: "Ana Costa",
     role: "Especialista em Avaliações",
     experience: "10 anos de experiência",
-    photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
-    fallback: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80"
+    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    fallback: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&q=80"
   }
 ];
 
