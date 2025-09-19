@@ -128,9 +128,6 @@ export default function AboutSectionPreview() {
           </div>
         </div>
       </div>
-    </section>
-  );
-}
           
           {/* Card elegante com fundo claro */}
           <div className="bg-white/80 backdrop-blur-sm border border-warm-lamp/20 rounded-premium p-8 shadow-lg max-w-4xl mx-auto mb-8">
