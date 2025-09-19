@@ -216,17 +216,23 @@ export default function Properties() {
       // Filtro por quartos
       if (filters.bedrooms && filters.bedrooms !== "all") {
         const bedrooms = property.bedrooms || 0;
-        const filterBedrooms = parseInt(filters.bedrooms);
-        if (filters.bedrooms === "4" && bedrooms < 4) return false;
-        if (filters.bedrooms !== "4" && bedrooms !== filterBedrooms) return false;
+        if (filters.bedrooms === "4+") {
+          if (bedrooms < 4) return false;
+        } else {
+          const filterBedrooms = parseInt(filters.bedrooms);
+          if (bedrooms !== filterBedrooms) return false;
+        }
       }
 
       // Filtro por vagas
       if (filters.parking && filters.parking !== "all") {
         const parking = property.parking_spaces || 0;
-        const filterParking = parseInt(filters.parking);
-        if (filters.parking === "3" && parking < 3) return false;
-        if (filters.parking !== "3" && parking !== filterParking) return false;
+        if (filters.parking === "3+") {
+          if (parking < 3) return false;
+        } else {
+          const filterParking = parseInt(filters.parking);
+          if (parking !== filterParking) return false;
+        }
       }
 
       // Filtro por financiamento
@@ -280,47 +286,54 @@ export default function Properties() {
   }
 
   return (
-    <div className="min-h-screen bg-luxury-cream">
+    <div className="min-h-screen bg-white">
       <PropertyFilter 
         onFilterChange={handleFilterChange} 
         totalProperties={filteredProperties.length} 
       />
       
       {/* Seção principal com background elegante */}
-      <section className="relative bg-white">
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="relative bg-luxury-cream">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-6">
           
-          {/* Header elegante */}
-          <div className="pt-8 pb-12 text-center">
-            <h1 className="text-3xl title-display text-luxury-charcoal mb-4 font-light">
-              Nossos Imóveis
-            </h1>
-            
-            {/* Status do sistema com design elegante */}
-            {error && !useSupabase && (
-              <div className="max-w-md mx-auto mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-sm text-luxury-gray text-luxury">
-                  <span className="font-medium text-warm-lamp">Aviso:</span> Usando dados de demonstração. 
-                  {error && ` (${error})`}
+          {/* Status do sistema compacto */}
+          {(error || !useSupabase) && (
+            <div className="mb-6 text-center">
+              {error && !useSupabase && (
+                <div className="inline-block p-2 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-xs text-luxury-gray text-luxury">
+                    <span className="font-medium text-warm-lamp">Aviso:</span> Dados de demonstração
+                  </p>
+                </div>
+              )}
+              
+              {!useSupabase && !error && (
+                <p className="text-xs text-luxury-gray/80 text-luxury-light">
+                  Configure Supabase para dados reais
                 </p>
-              </div>
-            )}
-            
-            {!useSupabase && !error && (
-              <p className="text-sm text-luxury-gray/80 mt-2 text-luxury-light">
-                Dados de demonstração - Configure Supabase para dados reais
-              </p>
-            )}
-            
-            {useSupabase && (
-              <div className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <p className="text-sm text-luxury-gray text-luxury">
+              )}
+              
+              {useSupabase && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 rounded-lg">
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                  <p className="text-xs text-luxury-gray text-luxury">
+                    Conectado ao banco de dados
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {useSupabase && !error && (
+            <div className="mb-6 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 rounded-lg">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                <p className="text-xs text-luxury-gray text-luxury">
                   Conectado ao banco de dados
                 </p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Lista de propriedades */}
           {filteredProperties.length === 0 ? (
@@ -365,6 +378,16 @@ export default function Properties() {
                       </span>
                     )}
                   </p>
+                </div>
+              </div>
+            </>
+          )}
+
+        </div>
+      </section>
+    </div>
+  );
+}
                 </div>
               </div>
             </>
