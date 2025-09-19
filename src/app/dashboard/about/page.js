@@ -8,29 +8,6 @@ const stats = [
   { number: "98%", label: "Aprovação", description: "Índice de satisfação" },
 ];
 
-const values = [
-  {
-    title: "Transparência",
-    description: "Clareza total em cada etapa do processo, sem surpresas ou custos ocultos.",
-    icon: "🔍"
-  },
-  {
-    title: "Excelência",
-    description: "Padrão superior de qualidade em todos os nossos serviços e atendimento.",
-    icon: "⭐"
-  },
-  {
-    title: "Confiança",
-    description: "Relacionamentos duradouros baseados em credibilidade e resultados.",
-    icon: "🤝"
-  },
-  {
-    title: "Inovação",
-    description: "Tecnologia e métodos modernos para otimizar sua experiência.",
-    icon: "🚀"
-  }
-];
-
 const team = [
   {
     name: "Maria Silva",
@@ -142,32 +119,6 @@ export default function About() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Valores */}
-      <section className="py-24 bg-luxury-cream">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-            <h2 className="text-4xl title-luxury text-luxury-charcoal mb-6">
-              Nossos Valores
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {values.map((value, index) => (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="text-4xl mb-6">{value.icon}</div>
-                <h3 className="text-xl title-luxury text-luxury-charcoal mb-4">
-                  {value.title}
-                </h3>
-                <p className="text-luxury-gray text-luxury-light leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
