@@ -300,14 +300,15 @@ export default function Contact() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-luxury-charcoal/80" />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-black/60" />
         
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center text-white">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          <h2 className="text-4xl title-luxury mb-8 text-white">
+          <h2 className="text-4xl title-luxury mb-8 text-white drop-shadow-lg">
             Pronto para Encontrar seu Lar Ideal?
           </h2>
-          <p className="text-xl text-luxury-light mb-10 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-luxury-light mb-10 leading-relaxed max-w-2xl mx-auto text-white/95 drop-shadow-md">
             Nossa equipe está pronta para ajudar você a realizar o sonho da casa própria
           </p>
           
