@@ -6,28 +6,8 @@ export default function LeadSection() {
       {/* Seção principal */}
       <div className="relative bg-luxury-cream">
         
-        <div className="relative z-10 p-5 pb-2 md:px-[15vw] lg:px-[20vw] md:pt-16 md:pb-8 w-full flex flex-col justify-center items-center pt-12 pb-8">
+        <div className="relative z-10 p-5 pb-2 md:px-[15vw] lg:px-[20vw] md:pt-16 md:pb-4 w-full flex flex-col justify-center items-center pt-12 pb-4">
           <div className="w-px h-12 bg-warm-lamp mx-auto mb-8 lamp-glow"></div>
-          
-          {/* Card elegante com fundo claro */}
-          <div className="bg-white/90 backdrop-blur-sm border border-warm-lamp/20 rounded-premium p-8 shadow-lg max-w-4xl mx-auto">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-12 h-px bg-warm-lamp mr-4 opacity-60"></div>
-              <span className="text-warm-lamp font-medium label-luxury">Excelência Imobiliária</span>
-              <div className="w-12 h-px bg-warm-lamp ml-4 opacity-60"></div>
-            </div>
-            <blockquote className="text-luxury-charcoal text-luxury text-lg lg:text-xl text-center leading-relaxed">
-              <span className="text-2xl text-warm-lamp">"</span>
-              <span className="px-2">
-                Uma imobiliária como nenhuma outra, a Alpha Imobiliária oferece os imóveis 
-                mais incríveis e bem localizados em Fortaleza e região metropolitana
-              </span>
-              <span className="text-2xl text-warm-lamp">"</span>
-            </blockquote>
-            <cite className="block text-center mt-4 text-warm-lamp font-medium text-sm tracking-wide">
-              — Diário do Nordeste
-            </cite>
-          </div>
           
           <div className="mt-8">
             <a 
@@ -37,6 +17,58 @@ export default function LeadSection() {
               Avaliação Gratuita do Imóvel
             </a>
           </div>
+        </div>
+      </div>
+
+      {/* Faixa assimétrica com citação */}
+      <div className="relative w-full overflow-hidden">
+        {/* Faixa preta assimétrica */}
+        <div 
+          className="relative bg-luxury-charcoal text-white py-12 px-6"
+          style={{
+            clipPath: 'polygon(0 15%, 100% 0%, 100% 85%, 0% 100%)',
+            transform: 'skewY(-1deg)',
+          }}
+        >
+          {/* Conteúdo da faixa */}
+          <div 
+            className="max-w-5xl mx-auto text-center"
+            style={{ transform: 'skewY(1deg)' }}
+          >
+            {/* Label superior */}
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-8 h-px bg-warm-lamp mr-3 opacity-80"></div>
+              <span className="text-warm-lamp font-medium label-luxury tracking-widest">
+                RECONHECIMENTO
+              </span>
+              <div className="w-8 h-px bg-warm-lamp ml-3 opacity-80"></div>
+            </div>
+            
+            {/* Citação principal */}
+            <blockquote className="text-white text-luxury text-xl lg:text-2xl leading-relaxed max-w-4xl mx-auto mb-6">
+              <span className="text-3xl text-warm-lamp font-serif">"</span>
+              <span className="font-light tracking-wide px-2">
+                Uma imobiliária como nenhuma outra, a Alpha Imobiliária oferece os imóveis 
+                mais incríveis e bem localizados em Fortaleza e região metropolitana
+              </span>
+              <span className="text-3xl text-warm-lamp font-serif">"</span>
+            </blockquote>
+            
+            {/* Citação fonte */}
+            <cite className="block text-warm-lamp font-medium text-base tracking-wide">
+              — Diário do Nordeste
+            </cite>
+            
+            {/* Elementos decorativos */}
+            <div className="flex justify-center mt-8">
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-warm-lamp to-transparent opacity-60"></div>
+            </div>
+          </div>
+          
+          {/* Efeitos visuais sutis */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-luxury-charcoal/90 via-luxury-charcoal to-luxury-charcoal/90 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-warm-lamp/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-warm-lamp/5 rounded-full blur-2xl"></div>
         </div>
       </div>
 

@@ -270,6 +270,37 @@ img {
   image-rendering: crisp-edges;
 }
 
+/* Faixa assimétrica premium */
+.asymmetric-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.asymmetric-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -5%;
+  right: -5%;
+  bottom: 0;
+  background: var(--color-luxury-charcoal);
+  transform: skewY(-1deg);
+  z-index: -1;
+}
+
+.asymmetric-content {
+  transform: skewY(1deg);
+  position: relative;
+  z-index: 10;
+}
+
+/* Efeitos visuais para faixa */
+.banner-glow {
+  box-shadow: 
+    0 0 50px rgba(212, 175, 55, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 /* ----------------- FORMAS PREMIUM SUTILMENTE ARREDONDADAS ----------------- */
 .rounded-premium {
   border-radius: 12px;
