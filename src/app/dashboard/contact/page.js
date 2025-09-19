@@ -114,7 +114,6 @@ export default function Contact() {
             <h1 className="text-5xl lg:text-6xl font-display font-light text-white mb-8 leading-tight">
               Entre em
               <span className="block text-warm-lamp">Contato</span>
-            <p className="text-luxury-gray text-luxury-light">
             <p className="text-xl text-white/90 leading-relaxed text-luxury-light">
               Estamos aqui para ajudar você a encontrar o imóvel dos seus sonhos
             </p>
