@@ -128,34 +128,6 @@ export default function AboutSectionPreview() {
           </div>
         </div>
       </div>
-          
-          {/* Card elegante com fundo claro */}
-          <div className="bg-white/80 backdrop-blur-sm border border-warm-lamp/20 rounded-premium p-8 shadow-lg max-w-4xl mx-auto mb-8">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-px bg-warm-lamp mr-4 opacity-60"></div>
-              <span className="text-warm-lamp font-medium label-luxury">Nossa Essência</span>
-              <div className="w-12 h-px bg-warm-lamp ml-4 opacity-60"></div>
-            </div>
-            <blockquote className="text-luxury-charcoal text-luxury text-xl lg:text-2xl text-center leading-relaxed">
-              <span className="text-2xl text-warm-lamp">"</span>
-              <span className="px-2">
-                Confiança, transparência e excelência no mercado imobiliário desde 2014
-              </span>
-              <span className="text-2xl text-warm-lamp">"</span>
-            </blockquote>
-            <cite className="block text-center mt-4 text-warm-lamp font-medium text-sm tracking-wide">
-              — Alpha Conceito Imobiliária
-            </cite>
-          </div>
-          
-          <Link
-            href="/dashboard/about"
-            className="btn-luxury px-8 py-4 btn-text-luxury"
-          >
-            Conheça Nossa História
-          </Link>
-        </div>
-      </div>
     </section>
   );
 }
