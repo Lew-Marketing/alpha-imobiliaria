@@ -363,10 +363,10 @@ export default function Properties() {
               {/* Footer com informações elegante */}
               <div className="pb-12 pt-6 border-t border-gray-200">
                 <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-luxury-gray">
-                  <p className="text-luxury-light mb-2 sm:mb-0">
+                  <div className="text-luxury-light mb-2 sm:mb-0">
                     Exibindo <span className="font-medium text-luxury-charcoal">{filteredProperties.length}</span> de <span className="font-medium text-luxury-charcoal">{properties.length}</span> {filteredProperties.length === 1 ? 'imóvel' : 'imóveis'}
-                  </p>
-                  <p className="text-luxury-light">
+                  </div>
+                  <div className="text-luxury-light">
                     {useSupabase ? (
                       <span className="inline-flex items-center gap-1">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
@@ -378,7 +378,7 @@ export default function Properties() {
                         Dados de demonstração
                       </span>
                     )}
-                  </p>
+                  </div>
                 </div>
               </div>
             </>
