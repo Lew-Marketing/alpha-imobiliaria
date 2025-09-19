@@ -32,7 +32,7 @@ export default function HeroCarousel() {
   }, []);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[600px] overflow-hidden will-change-transform">
+    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[600px] overflow-hidden will-change-transform bg-luxury-cream">
   
       {images.map((src, index) => (
         <div
@@ -54,8 +54,8 @@ export default function HeroCarousel() {
                 sizes="(max-width: 1024px) 100vw, 60vw"
               />
               
-              {/* Overlay sutil */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent lg:to-black/5"></div>
+              {/* Overlay muito sutil */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent lg:to-luxury-cream/20"></div>
 
               {/* Indicators */}
               <div className="absolute bottom-6 left-6 flex gap-2 z-20">
@@ -63,8 +63,8 @@ export default function HeroCarousel() {
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`w-8 h-1 transition-all duration-500 ease-out ${
-                      i === current ? "bg-white" : "bg-white/40 hover:bg-white/60"
+                    className={`w-8 h-1 rounded-premium-sm transition-all duration-500 ease-out ${
+                      i === current ? "bg-warm-lamp" : "bg-warm-lamp/40 hover:bg-warm-lamp/60"
                     }`}
                     aria-label={`Ir para slide ${i + 1}`}
                   />
@@ -73,24 +73,24 @@ export default function HeroCarousel() {
             </div>
 
            
-            <div className="lg:w-2/5 w-full h-1/2 lg:h-full flex flex-col justify-center bg-background px-8 lg:px-12 py-8">
+            <div className="lg:w-2/5 w-full h-1/2 lg:h-full flex flex-col justify-center bg-luxury-cream px-8 lg:px-12 py-8">
               <div className="space-y-4 max-w-md">
-                <p className="text-luxury-gray font-light text-sm uppercase tracking-widest">
+                <p className="text-luxury-gray font-light text-sm uppercase tracking-widest label-luxury">
                   Today at Alpha Imobiliária
                 </p>
 
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-light text-luxury-charcoal leading-tight tracking-wide">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl title-display text-luxury-charcoal leading-tight">
                   Conte com a Alpha Imobiliária
                 </h2>
 
-                <p className="text-base lg:text-lg font-light text-luxury-gray leading-relaxed tracking-wide">
+                <p className="text-base lg:text-lg text-luxury-light text-luxury-gray leading-relaxed">
                   Compromisso em proporcionar a melhor moradia com o melhor preço para sua família.
                 </p>
 
                 <div className="pt-2">
                   <Link 
                     href="/dashboard/properties"
-                    className="inline-flex items-center gap-2 bg-warm-lamp text-luxury-charcoal px-8 py-3 rounded-lg font-medium text-sm tracking-wide hover:bg-warm-lamp/90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="inline-flex items-center gap-2 btn-luxury px-8 py-3 btn-text-luxury"
                   >
                     Ver Imóveis
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
