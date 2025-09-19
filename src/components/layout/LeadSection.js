@@ -20,17 +20,21 @@ export default function LeadSection() {
           
           {/* Card com backdrop blur para máxima legibilidade */}
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 shadow-2xl max-w-4xl mx-auto">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-px bg-warm-lamp mr-4"></div>
+              <span className="text-warm-lamp font-medium text-xs uppercase tracking-widest">Excelência Imobiliária</span>
+              <div className="w-12 h-px bg-warm-lamp ml-4"></div>
+            </div>
             <blockquote className="text-white font-light text-lg lg:text-xl text-center leading-relaxed">
               <span className="text-2xl text-warm-lamp">"</span>
               <span className="px-2">
-                Excelência em cada negócio, confiança em cada relacionamento. 
-                A Alpha Imobiliária conecta você ao seu lar dos sonhos em Fortaleza 
-                e região metropolitana.
+                Uma imobiliária como nenhuma outra, a Alpha Imobiliária oferece os imóveis 
+                mais incríveis e bem localizados em Fortaleza e região metropolitana
               </span>
               <span className="text-2xl text-warm-lamp">"</span>
             </blockquote>
             <cite className="block text-center mt-4 text-warm-lamp/90 font-medium text-sm tracking-wide">
-              — Sua nova jornada imobiliária começa aqui
+              — Diário do Nordeste
             </cite>
           </div>
           
@@ -39,7 +43,7 @@ export default function LeadSection() {
               className="inline-block bg-warm-lamp text-luxury-charcoal px-8 py-4 font-semibold text-sm uppercase tracking-widest hover:bg-warm-lamp/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
               href="/dashboard/contact"
             >
-              Descubra o Valor do Seu Imóvel
+              Avaliação Gratuita do Imóvel
             </a>
           </div>
         </div>
