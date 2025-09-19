@@ -251,6 +251,7 @@ export default function Properties() {
     const filtered = filterProperties(properties, newFilters);
     setFilteredProperties(filtered);
   };
+  
   useEffect(() => {
     fetchProperties();
   }, []);
@@ -378,16 +379,6 @@ export default function Properties() {
                       </span>
                     )}
                   </p>
-                </div>
-              </div>
-            </>
-          )}
-
-        </div>
-      </section>
-    </div>
-  );
-}
                 </div>
               </div>
             </>
