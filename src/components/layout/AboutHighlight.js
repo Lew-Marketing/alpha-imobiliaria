@@ -12,19 +12,33 @@ export default function AboutHighlight() {
             backgroundImage: `url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-luxury-charcoal/90 via-luxury-gray/80 to-luxury-charcoal/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/80" />
         
         <div className="relative z-10 text-center">
           <div className="w-px h-8 bg-warm-lamp mx-auto mb-4 lamp-glow"></div>
-          <p className="text-pearl-white font-serif font-light text-base text-center lg:text-lg drop-shadow-lg">
-            "Um dos 100 melhores do mundo" —{" "}
-            <span className="italic font-medium">GQ</span>
-          </p>
+          
+          {/* Card com backdrop blur para destaque */}
+          <div className="bg-white/15 backdrop-blur-lg border border-white/25 rounded-lg p-6 shadow-2xl max-w-2xl mx-auto mb-8">
+            <div className="flex items-center justify-center mb-3">
+              <div className="w-8 h-px bg-warm-lamp mr-3"></div>
+              <span className="text-warm-lamp font-medium text-xs uppercase tracking-widest">Reconhecimento</span>
+              <div className="w-8 h-px bg-warm-lamp ml-3"></div>
+            </div>
+            <blockquote className="text-white font-light text-lg lg:text-xl text-center leading-relaxed">
+              <span className="text-xl text-warm-lamp">"</span>
+              <span className="px-2">Referência em excelência imobiliária</span>
+              <span className="text-xl text-warm-lamp">"</span>
+            </blockquote>
+            <cite className="block text-center mt-3 text-warm-lamp/90 font-medium text-sm">
+              — Mercado Imobiliário CE
+            </cite>
+          </div>
+          
           <Link
             href="/dashboard/sell"
-            className="btn-luxury px-6 py-3 btn-text-luxury mt-6 inline-block"
+            className="inline-block bg-white text-luxury-charcoal px-8 py-4 font-semibold text-sm uppercase tracking-widest hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
-            Descubra o valor do seu imóvel
+            Avalie Seu Imóvel Gratuitamente
           </Link>
         </div>
       </div>
